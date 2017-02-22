@@ -10,13 +10,7 @@
             <li class="active">New Order</li>
         </ol>
     </section>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script>
-        $( function() {
-            $( "#datepicker" ).datepicker();
-        } );
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css">
 @endsection
 
 @section('content')
@@ -29,11 +23,44 @@
 
                 <div class="box-body">
 
-                    <product-search></product-search>
+                    {{--<product-search v-bind:options="options">--}}
+                        {{--<template slot="item" scope="option">--}}
+                            {{--<article class="media">--}}
+                                {{--<figure class="media-left">--}}
+                                    {{--<p class="image is-64x64">--}}
+                                        {{--<img :src="option.thumbnail">--}}
+                                    {{--</p>--}}
+                                {{--</figure>--}}
+                                {{--<p>--}}
+                                    {{--<strong>@{{ option.title }}</strong>--}}
+                                    {{--<br>--}}
+                                    {{--@{{ option.description }}--}}
+                                {{--</p>--}}
+                            {{--</article>--}}
+                        {{--</template>--}}
+                    {{--</product-search>--}}
+                    <vue-typeahead
+                            v-model="value"
+                            prefetch="https://twitter.github.io/typeahead.js/data/nfl.json"
+                            :default-suggestion="false"
+                            display-key='team'
+                            :suggestion-template="myTemplate"
+                            classes="form-control"
+                            v-on:selected="done">
 
+                    </vue-typeahead>
 
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('after scripts')
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
 @endsection

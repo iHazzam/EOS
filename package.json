@@ -7,6 +7,7 @@
     "production": "node_modules/cross-env/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "cross-env": "^3.1.4",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
@@ -16,7 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "cross-env": "^3.1.4",
-    "vue-typeahead": "^2.3.0"
+    "vuejs-autocomplete": "^0.1.1",
+    "vuejs-typeahead": "^0.2.2"
   }
 }
