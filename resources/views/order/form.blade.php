@@ -1,9 +1,9 @@
-@extends('backpack::layout')
+@extends('layout')
 
 @section('header')
     <section class="content-header">
         <h1>
-            Playdale Export Order System<small>Place new orders and see existing orders for your playgrounds </small>
+            Playdale Export Order System<small>Place a new playground order! </small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}">{{ config('backpack.base.project_name') }}</a></li>
@@ -28,7 +28,7 @@
                     <div class="box-title">New Order</div>
                 </div>
 
-                <div class="box-body" id="root">
+                <div class="box-body">
                     <form name="basicform" id="basicform" method="post" action="{{url('/order/create/post')}}" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                                 <legend>Company Details</legend>
@@ -100,7 +100,7 @@
                                         Collection
                                     </label>
                                 </div>
-                                <div class="radio disabled">
+                                <div class="radio ">
                                     <label>
                                         <input type="radio" name="delivery" id="delivery3" @click="unsetDelivery" value="unconfirmed">
                                         Unconfirmed
@@ -173,6 +173,5 @@
     </div>
 @endsection
 @section('after_scripts')
-    <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
     <script src="{{ asset('js/form.js') }}"></script>
 @endsection

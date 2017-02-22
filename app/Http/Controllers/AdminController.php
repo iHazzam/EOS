@@ -13,10 +13,14 @@ class AdminController extends Controller
     }
 
     //
-    public function showAdminStats()
+    public function showUsers()
     {
-        //todo: get the stats they want to see
-        return view('admin.stats')->with();
+        $users = User::where('admin','=','0')->get();
+        return view('admin.users')->with($users);;
+    }
+    public function showOrders()
+    {
+        return view('admin.orders');
     }
     public function showCreateUserForm()
     {
@@ -24,10 +28,9 @@ class AdminController extends Controller
     }
     public function createUser(Request $request)
     {
-        //todo: create user post formmj
-        
+        //todo: create user post form
     }
-    public function showEditForm()
+    public function showEditUserForm()
     {
         return view('admin.edituser');
     }
@@ -39,6 +42,15 @@ class AdminController extends Controller
     {
         //todo: process delete user form
     }
+    public function showEditOrderForm()
+    {
+        return view('admin.createuser');
+    }
+    public function editOrder(Request $request, User $user)
+    {
+        //todo: process edit user form
+    }
+
 
 
 }

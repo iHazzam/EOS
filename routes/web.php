@@ -16,6 +16,10 @@
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/','PagesController@showDashboard');
+    Route::get('/order/test', function(){
+       return view('order.test');
+    });
+    Route::post('/password/reset/internal', 'HomeController@resetInternal');
     Route::get('/dashboard','PagesController@showDashboard');
     Route::get('/order/create','OrderController@showForm');
     Route::post('/order/create/post','OrderController@postForm');
@@ -34,7 +38,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
     Route::post('/create/user/post','AdminController@createUser');
     Route::get('/edit/{user}','AdminController@showEditForm');
     Route::put('/edit/{user}/post','AdminController@editUser');
-    Route::delete('/delete/{user}','AdminController@deleteUser');
+    Route::delete('/delete/user/{user}','AdminController@deleteUser');
+    
 
 });
 

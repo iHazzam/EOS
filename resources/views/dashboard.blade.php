@@ -1,9 +1,9 @@
-@extends('backpack::layout')
+@extends('layout')
 
 @section('header')
     <section class="content-header">
         <h1>
-            Playdale Export Order System<small>Place new orders and see existing orders for your playgrounds </small>
+            Playdale Export Order System<small>Place new orders and see existing orders for your playgrounds! </small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}">{{ config('backpack.base.project_name') }}</a></li>
@@ -54,16 +54,16 @@
                                     </td>
                                     <!-- Delivery Date -->
                                     <td class="table-text">
-                                        <div>{{ $teacher->delivery_date->diffForHumans() }}</div>
+                                        <div>{{ $order->delivery_date->diffForHumans() }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $teacher->delivery }}</div>
+                                        <div>{{ $order->delivery }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $teacher->order_total }}</div>
+                                        <div>{{ $order->order_total }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $teacher->shipping_total }}</div>
+                                        <div>{{ $order->shipping_total }}</div>
                                     </td>
                                 </tr>
                             @endforeach

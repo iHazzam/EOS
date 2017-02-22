@@ -1,6 +1,10 @@
+import './bootstrap'
+
+Vue.component('product-search', require('./components/Productsearch'));
 
 
-var app = new Vue({
+
+const app = new Vue({
     el: '#root',
     data: {
         defaultContact : false,
@@ -24,5 +28,5 @@ var app = new Vue({
     },
     computed: {
     }
-
 });
+

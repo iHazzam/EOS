@@ -35,5 +35,9 @@ class PagesController extends Controller
     {
         return view('settings');
     }
+    public function postUserSettings(Request $request)
+    {
+
+    }
 
 }
