@@ -1,8 +1,5 @@
 import './bootstrap'
 
-Vue.component('product-search', require('./components/Productsearch'));
-
-
 var MyComponent = require('./components/VueTypeahead.vue');
 Vue.component('vueTypeahead', MyComponent);
 
@@ -15,7 +12,7 @@ const app = new Vue({
         label:'',
         value: '',
         value1: '',
-        myTemplate: '<div><h3>{{team}}</h3><h4>Custom Template</h4></div>',
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="team"></p></figure><p><strong>{{ team }}</strong><br>{{ team }}</p></article>',
         localValues: ['Dhaka', 'Rangpur', 'Rajshahi', 'Sylhet', 'Khulna']
     },
     methods:{

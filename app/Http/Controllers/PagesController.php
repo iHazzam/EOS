@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
-  //  public function welcome()
-  //  {
+//    public function welcome()
+//    {
 //        //dd(phpinfo());
 //        dd(DB::connection('sqlsrv')->table('dbo.vw_PhilsExportOrderForm')->first());
 //        if(DB::connection('sqlsrv')->get)
@@ -18,9 +18,9 @@ class PagesController extends Controller
 //        }
 //        else{
 //            dd('not connected');
-     //   }
-        //return view('welcome');
- //   }
+//        }
+//        return view('welcome');
+//    }
 
     public function welcome()
     {

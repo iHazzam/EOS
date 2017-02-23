@@ -22,33 +22,22 @@
                 </div>
 
                 <div class="box-body">
+                    <span class="twitter-typeahead">
+                        <p class="control has-icon has-icon-right">
+                                <vue-typeahead
+                                        v-model="value"
+                                        prefetch="https://twitter.github.io/typeahead.js/data/nfl.json"
+                                        :default-suggestion="false"
+                                        display-key='team'
+                                        :suggestion-template="myTemplate"
+                                        classes="form-control "
+                                        v-on:selected="done">
 
-                    {{--<product-search v-bind:options="options">--}}
-                        {{--<template slot="item" scope="option">--}}
-                            {{--<article class="media">--}}
-                                {{--<figure class="media-left">--}}
-                                    {{--<p class="image is-64x64">--}}
-                                        {{--<img :src="option.thumbnail">--}}
-                                    {{--</p>--}}
-                                {{--</figure>--}}
-                                {{--<p>--}}
-                                    {{--<strong>@{{ option.title }}</strong>--}}
-                                    {{--<br>--}}
-                                    {{--@{{ option.description }}--}}
-                                {{--</p>--}}
-                            {{--</article>--}}
-                        {{--</template>--}}
-                    {{--</product-search>--}}
-                    <vue-typeahead
-                            v-model="value"
-                            prefetch="https://twitter.github.io/typeahead.js/data/nfl.json"
-                            :default-suggestion="false"
-                            display-key='team'
-                            :suggestion-template="myTemplate"
-                            classes="form-control"
-                            v-on:selected="done">
 
-                    </vue-typeahead>
+                                </vue-typeahead>
+                        </p>
+                    </span>
+
 
                 </div>
             </div>

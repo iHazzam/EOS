@@ -1,12 +1,18 @@
 <template>
-  <input ref="input" class="typeahead-suggestions"
-         :class="classes"
-         :id = "id"
-         v-bind:value="value"
-         v-on:input="updateValue($event.target.value)"
-         v-on:blur="formatValue"
-         :placeholder="placeholder"
-          >
+  <div class="autocomplete-input">
+      <p class="control has-icon has-icon-right">
+        <input ref="input" class="input is-large"
+           :class="classes"
+           :id = "id"
+           v-bind:value="value"
+           v-on:input="updateValue($event.target.value)"
+           v-on:blur="formatValue"
+           :placeholder="placeholder"
+            >
+        <i class="fa fa-angle-down"></i>
+      </p>
+    </div>
+
 </template>
 <script>
   var Bloodhound = require('typeahead.js')
