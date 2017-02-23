@@ -26,9 +26,9 @@
                         <p class="control has-icon has-icon-right">
                                 <vue-typeahead
                                         v-model="value"
-                                        prefetch="https://twitter.github.io/typeahead.js/data/nfl.json"
+                                        prefetch="{{url('/api/products/get')}}"
                                         :default-suggestion="false"
-                                        display-key='team'
+                                        display-key='code'
                                         :suggestion-template="myTemplate"
                                         classes="form-control "
                                         v-on:selected="done">

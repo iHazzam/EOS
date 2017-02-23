@@ -11199,8 +11199,7 @@ const app = new Vue({
         label: '',
         value: '',
         value1: '',
-        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="team"></p></figure><p><strong>{{ team }}</strong><br>{{ team }}</p></article>',
-        localValues: ['Dhaka', 'Rangpur', 'Rajshahi', 'Sylhet', 'Khulna']
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img src="""></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ price.toFixed(2) }}</p></article>'
     },
     methods: {
         toggleDefaultContact: function () {
@@ -12254,7 +12253,7 @@ var Bloodhound = __webpack_require__(34);
         name: 'Typeahead-Suggestion',
         display: this.displayKey,
         source: this.getSource(),
-        limit: Infinity,
+        limit: 5,
         templates
       };
       $(document).find('#' + self.id).typeahead({

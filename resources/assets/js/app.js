@@ -12,8 +12,8 @@ const app = new Vue({
         label:'',
         value: '',
         value1: '',
-        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="team"></p></figure><p><strong>{{ team }}</strong><br>{{ team }}</p></article>',
-        localValues: ['Dhaka', 'Rangpur', 'Rajshahi', 'Sylhet', 'Khulna']
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img src="""></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ formatprice }}</p></article>',
+        // localValues: ['Dhaka', 'Rangpur', 'Rajshahi', 'Sylhet', 'Khulna']
     },
     methods:{
         toggleDefaultContact: function(){

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 class updateProductCache extends Command
 {
     /**
@@ -38,26 +39,31 @@ class updateProductCache extends Command
      */
     public function handle()
     {
+
+        $prodgrp = "Prod Group";
         $productdata = DB::connection('sqlsrv')->table('dbo.vw_PhilsExportOrderForm')->get();
         $product_json = [];
         $bar = $this->output->createProgressBar(count($productdata));
         foreach ($productdata as $product)
         {
-            $image = $this->getImageFromProductCode($product["Code"]);
+            $image = $this->getImageFromProductCode($product->Code);
             $prodjs = [
-                "code" => $product["Code"],
-                "Name" => $product["Name"],
+                "code" => $product->Code,
+                "name" => $product->Name,
                 "imageurl" => $image,
-                "group" => $product['Prod Group'],
-                "price" => $product['Price'],
+                "group" => $product->$prodgrp,
+                "price" => $product->Price,
                 ];
             $product_json[] = $prodjs; //append it to the big json array
+            $bar->advance();
         }
         $expiresAt = Carbon::tomorrow();
+        Cache::forget('products');
         Cache::put('products', json_encode($product_json), $expiresAt);
+        $bar->finish();
     }
     private function getImageFromProductCode($productcode)
     {
-        return DB::table('product_images')->where('code','=',$productcode)->pluck();
+        return DB::table('product_images')->where('code','=',$productcode)->first();
     }
 }
