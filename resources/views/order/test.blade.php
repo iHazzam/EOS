@@ -37,9 +37,24 @@
                                 </vue-typeahead>
                         </p>
                     </span>
-
-
                 </div>
+                <nav class="panel mywidth">
+                    <div class="panel-heading">
+                        Your Quote
+                    </div>
+                    <div class="panel-block">
+                        No items here
+                    </div>
+                    <div class="panel-block">
+                        <div class="columns is-fullwidth"><span class="column is-one-third">Total: <del>@{{total_price}}</del></span><span class="column is-one-third is-offset-one-third">After Discount: <b>@{{client_price}}</b></span></div>
+                    </div>
+                    <div class="panel-block">
+                        <button class="button is-primary is-outlined ">
+                            Reset all filters
+                        </button>
+                    </div>
+                </nav>
+
             </div>
         </div>
     </div>

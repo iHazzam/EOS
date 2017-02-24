@@ -6,13 +6,15 @@ Vue.component('vueTypeahead', MyComponent);
 const app = new Vue({
     el: '#root',
     data: {
+        total_price: 0,
+        client_price: 0,
         defaultContact : false,
         deliveryChecked: false,
         defaultDelivery : false,
         label:'',
         value: '',
         value1: '',
-        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img src="""></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ formatprice }}</p></article>',
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="imageurl"></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ price }}</p></article>',
         // localValues: ['Dhaka', 'Rangpur', 'Rajshahi', 'Sylhet', 'Khulna']
     },
     methods:{
@@ -31,10 +33,14 @@ const app = new Vue({
 
         done: function(data) {
             console.log(data);
+        },
+        updateTotalPrice: function(posneg){
+            total_price += posneg;
+        },
+        updateClientPrice: function(posneg){
+            client_price += posneg;
         }
 
     },
-    computed: {
-    }
 });
 

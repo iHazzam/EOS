@@ -40,7 +40,7 @@ class updateProductCache extends Command
     public function handle()
     {
 
-        $prodgrp = "Prod Group";
+        $prodgrp = "Prod Group"; //TODO: work out discount code information
         $productdata = DB::connection('sqlsrv')->table('dbo.vw_PhilsExportOrderForm')->get();
         $product_json = [];
         $bar = $this->output->createProgressBar(count($productdata));
@@ -52,7 +52,7 @@ class updateProductCache extends Command
                 "name" => $product->Name,
                 "imageurl" => $image,
                 "group" => $product->$prodgrp,
-                "price" => $product->Price,
+                "price" => round($product->Price,2)
                 ];
             $product_json[] = $prodjs; //append it to the big json array
             $bar->advance();
@@ -64,6 +64,13 @@ class updateProductCache extends Command
     }
     private function getImageFromProductCode($productcode)
     {
-        return DB::table('product_images')->where('code','=',$productcode)->first();
+        $turn = DB::table('product_images')->where('code','=',$productcode)->first();
+        if($turn == null)
+        {
+            return asset('storage/default.png');
+        }
+        else{
+            return asset('storage/images'.$turn->path);
+        }
     }
 }

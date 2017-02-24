@@ -11199,7 +11199,7 @@ const app = new Vue({
         label: '',
         value: '',
         value1: '',
-        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img src="""></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ price.toFixed(2) }}</p></article>'
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="imageurl"></p></figure><p><strong>{{ code }}</strong> {{name}} <br>£{{ price }}</p></article>'
     },
     methods: {
         toggleDefaultContact: function () {
@@ -11219,8 +11219,7 @@ const app = new Vue({
             console.log(data);
         }
 
-    },
-    computed: {}
+    }
 });
 
 /***/ }),
