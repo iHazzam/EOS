@@ -15,7 +15,7 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-          <li class="header">Useful Links</li>
+          <li class="header">USEFUL LINKS</li>
           <!-- ================================================ -->
           <!-- ==== Recommended place for admin menu items ==== -->
           <!-- ================================================ -->
@@ -26,6 +26,12 @@
           <li class="header">{{ trans('backpack::base.user') }}</li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/user/settings') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>
+          @if(Auth::user()->isAdmin())
+            <li class="header">ADMIN FUNCTIONS</li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/admin/users') }}"><i class="fa fa-users"></i> <span>Manage Site Users</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/admin/orders') }}"><i class="fa fa-credit-card"></i> <span>See all orders</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/admin/settings') }}"><i class="fa fa-cogs"></i> <span>Manage Site Settings</span></a></li>
+          @endif
         </ul>
       </section>
       <!-- /.sidebar -->

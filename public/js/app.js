@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11185,15 +11185,20 @@ module.exports = g;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_Product_js__ = __webpack_require__(33);
 
 
-var MyComponent = __webpack_require__(35);
+
+
+var MyComponent = __webpack_require__(37);
 Vue.component('vueTypeahead', MyComponent);
 
 const app = new Vue({
     el: '#root',
     data: {
         defaultContact: false,
+        orderedproducts: new __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__["a" /* default */](),
         deliveryChecked: false,
         defaultDelivery: false,
         label: '',
@@ -11214,12 +11219,25 @@ const app = new Vue({
         unsetDelivery: function () {
             this.deliveryChecked = false;
         },
-
+        clearAll: function () {
+            this.orderedproducts = new __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__["a" /* default */]();
+        },
         done: function (data) {
             console.log(data);
+            data.discountmod = 0.6;
+            var discountprice = data.price * data.discountmod;
+            var newprod = new __WEBPACK_IMPORTED_MODULE_2__classes_Product_js__["a" /* default */](data.code, data.name, data.price, discountprice, data.imageurl);
+            this.orderedproducts.addProductToOrder(newprod);
+        },
+        updateTotalPrice: function (posneg) {
+            total_price += posneg;
+        },
+        updateClientPrice: function (posneg) {
+            client_price += posneg;
         }
 
     }
+
 });
 
 /***/ }),
@@ -12094,7 +12112,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-var Bloodhound = __webpack_require__(34);
+var Bloodhound = __webpack_require__(36);
 /* harmony default export */ __webpack_exports__["default"] = {
   data: function () {
     var id = 'typeahead-suggestion' + parseInt(Math.random() * 100000);
@@ -12173,6 +12191,7 @@ var Bloodhound = __webpack_require__(34);
     },
     formatValue: function () {
       this.$refs.input.value = this.value;
+      this.input = "";
     },
     transformer: function (response) {
       if (this.responseWrapper) {
@@ -12272,7 +12291,7 @@ var Bloodhound = __webpack_require__(34);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
@@ -12289,6 +12308,73 @@ window.axios.defaults.headers.common = {
 
 /***/ }),
 /* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by harry on 24/02/2017.
+ */
+
+class OrderedProducts {
+
+    constructor() {
+        this.products = [];
+    }
+
+    addProductToOrder(product) {
+        this.products.push(product);
+    }
+
+    getTotalPrice() {
+        var totalprice = 0;
+        for (var i = 0; i < this.products.length; i++) {
+            totalprice += this.products[i].price * this.products[i].quantity;
+        }
+        return totalprice;
+    }
+
+    getDiscountedPrice() {
+        var totalprice = 0;
+        for (var i = 0; i < this.products.length; i++) {
+            totalprice += this.products[i].discountedprice * this.products[i].quantity;
+        }
+        return totalprice;
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = OrderedProducts;
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Product {
+
+    constructor(code, name, price, discountprice, imageurl) {
+        this.code = code;
+        this.name = name;
+        this.price = price.toFixed(2);
+        this.discountedprice = discountprice.toFixed(2);
+        this.imageurl = imageurl;
+        this.quantity = 1;
+    }
+
+    incrementQuantity() {
+        this.quantity += 1;
+    }
+
+    decrementQuantity() {
+        this.quantity -= 1;
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Product;
+
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -12481,7 +12567,7 @@ window.axios.defaults.headers.common = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(1)))
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -12534,13 +12620,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(32);
+__webpack_require__(34);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(setImmediate) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14996,17 +15082,17 @@ exports.clearImmediate = clearImmediate;
         }
     })();
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35).setImmediate))
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(36)(
+var Component = __webpack_require__(38)(
   /* script */
   __webpack_require__(30),
   /* template */
-  __webpack_require__(37),
+  __webpack_require__(39),
   /* scopeId */
   null,
   /* cssModules */
@@ -15033,7 +15119,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = function normalizeComponent (
@@ -15086,7 +15172,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15124,7 +15210,7 @@ if (false) {
 }
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23700,7 +23786,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(9)))
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);

@@ -29,11 +29,11 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
     //uses admin middleware, prefixed /admin/
-    Route::get('/dashboard/stats','AdminController@showAdminStats');
     Route::get('/users','AdminController@showUsers');
-    Route::get('/settings/','AdminController@showAdminSettings');
-    Route::get('/settings/post','AdminController@postAdminSettings');
+    Route::get('/settings','AdminController@showAdminSettings');
+    Route::get('/orders', 'AdminController@showOrders');
 
+    Route::get('/settings/post','AdminController@postAdminSettings');
     Route::get('/create/user','AdminController@showCreateUserForm');
     Route::post('/create/user/post','AdminController@createUser');
     Route::get('/edit/{user}','AdminController@showEditForm');

@@ -14,7 +14,7 @@ class apiController extends Controller
             return Cache::get('products');
         }
         else{
-            return "peanuts";
+            return array('Code'=>503,'Message'=>'Cache Incomplete');
         }
     }
 

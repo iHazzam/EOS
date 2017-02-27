@@ -10,6 +10,14 @@
             <li class="active">{{ trans('backpack::base.dashboard') }}</li>
         </ol>
     </section>
+    <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div> <!-- end .flash-message -->
 @endsection
 
 
@@ -19,10 +27,11 @@
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <div class="box-title">Site Users (</div>
+                        <div class="box-title">Site Users </div><div class="pull-right"><a href="/admin/create/user" class="btn btn-info " role="button">New User</a></div>
                     </div>
 
                     <div class="box-body">
+                        @if(is_array($users))
                             <table class="table table-striped task-table">
 
                                 <!-- Table Headings -->
@@ -49,7 +58,7 @@
                                         </td>
                                         {{--Number of orders placed--}}
                                         <td class="table-text">
-                                            <div>{{ $user->orders()->count();}}</div>
+                                            <div>{{ $user->orders()->count()}}</div>
                                         </td>
                                         <!-- latest order-->
                                         <td class="table-text">
@@ -72,6 +81,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                        @endif
                     </div>
                     @foreach ($users as $user)
                         <div id="modal{{$user->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

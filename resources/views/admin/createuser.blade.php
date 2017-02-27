@@ -18,11 +18,27 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <div class="box-title">Welcome, PlaydaleAdmin</div>
+                    <div class="box-title">Create Site User</div>
                 </div>
 
                 <div class="box-body">
+                    <form name="basicform" id="basicform" method="post" action="{{url('/admin/create/user/post')}}" >
+                        {!! csrf_field() !!}
 
+                        @include('admin.forms.userform')
+
+
+
+                        <div class="clearfix" style="height: 10px;clear: both;"></div>
+                        <div class="clearfix" style="height: 10px;clear: both;"></div>
+
+                        <div class="form-group  col-xs-4">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <button type="submit" class="btn btn-warning">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
 
                 </div>
 

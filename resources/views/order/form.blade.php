@@ -59,7 +59,7 @@
                                     <div class="form-group" >
                                         <label for="email" class="control-label">Order Contact Email</label>
 
-                                        <input type="text" class="form-control" id="name_on_order" name="name_on_order" placeholder=""  value="{{ old('name_on_order') ? old('name_on_order') : Auth::user()->contact_name  }}" required="">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder=""  value="{{ old('email') ? old('email') : Auth::user()->email  }}" required="">
 
                                     </div>
                                 </div>

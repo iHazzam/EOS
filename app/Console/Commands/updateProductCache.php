@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Discount;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -39,6 +40,7 @@ class updateProductCache extends Command
      */
     public function handle()
     {
+        $this->parseDiscountBands();
 
         $prodgrp = "Prod Group"; //TODO: work out discount code information
         $productdata = DB::connection('sqlsrv')->table('dbo.vw_PhilsExportOrderForm')->get();
@@ -47,19 +49,25 @@ class updateProductCache extends Command
         foreach ($productdata as $product)
         {
             $image = $this->getImageFromProductCode($product->Code);
+            $prodgroup = $product->$prodgrp;
+            $discountpercent = Discount::where('id','=',$prodgroup)->first();
+            if($discountpercent == null)
+            {
+                $discountpercent = 0;
+            }
             $prodjs = [
                 "code" => $product->Code,
                 "name" => $product->Name,
                 "imageurl" => $image,
-                "group" => $product->$prodgrp,
+                "discountmod" => $discountpercent,
                 "price" => round($product->Price,2)
                 ];
             $product_json[] = $prodjs; //append it to the big json array
             $bar->advance();
         }
-        $expiresAt = Carbon::tomorrow();
+        $expiresAt = Carbon::now()->addHours(25);
         Cache::forget('products');
-        Cache::put('products', json_encode($product_json), $expiresAt);
+        Cache::forever('products', json_encode($product_json));
         $bar->finish();
     }
     private function getImageFromProductCode($productcode)
@@ -71,6 +79,30 @@ class updateProductCache extends Command
         }
         else{
             return asset('storage/images'.$turn->path);
+        }
+    }
+    private function parseDiscountBands()
+    {
+        $discountbands = DB::connection('sqlsrv')->table('dbo.vw_PhilsDiscountBands')->get();
+        foreach($discountbands as $db)
+        {
+            if(stripos($db->Name, 'Export') !== false)
+            {
+                if($fish = Discount::where('id','=',$db->Code)->first())
+                {
+                    if($fish->discountpercent != $db->DiscountPercentValue)
+                    {
+                        $fish->discountpercent = $db->DiscountPercentValue;
+                        $fish->save();
+                    }
+                }
+                else{
+                    $fish = new Discount();
+                    $fish->id = $db->Code;
+                    $fish->discountpercent = $db->DiscountPercentValue;
+                    $fish->save();
+                }
+            }
         }
     }
 }

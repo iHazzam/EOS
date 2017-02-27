@@ -1,4 +1,7 @@
 import './bootstrap'
+import OrderedProducts from './classes/OrderedProducts.js';
+import Product from './classes/Product.js';
+
 
 var MyComponent = require('./components/VueTypeahead.vue');
 Vue.component('vueTypeahead', MyComponent);
@@ -6,9 +9,8 @@ Vue.component('vueTypeahead', MyComponent);
 const app = new Vue({
     el: '#root',
     data: {
-        total_price: 0,
-        client_price: 0,
         defaultContact : false,
+        orderedproducts: new OrderedProducts(),
         deliveryChecked: false,
         defaultDelivery : false,
         label:'',
@@ -30,9 +32,15 @@ const app = new Vue({
         unsetDelivery: function(){
             this.deliveryChecked = false;
         },
-
+        clearAll: function(){
+          this.orderedproducts = new OrderedProducts();
+        },
         done: function(data) {
             console.log(data);
+            data.discountmod = 0.6;
+            var discountprice = data.price * data.discountmod;
+            var newprod = new Product(data.code,data.name,data.price,discountprice,data.imageurl)
+            this.orderedproducts.addProductToOrder(newprod);
         },
         updateTotalPrice: function(posneg){
             total_price += posneg;
@@ -41,6 +49,7 @@ const app = new Vue({
             client_price += posneg;
         }
 
-    },
+    }
+
 });
 
