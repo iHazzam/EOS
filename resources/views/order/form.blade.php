@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form name="basicform" id="basicform" method="post" action="{{url('/order/create/post')}}" enctype="multipart/form-data">
+                    <form name="basicform" id="basicform" method="post" action="{{url('/order/create/post')}}" >
                         {!! csrf_field() !!}
                                 <legend>Company Details</legend>
                                 <div class="form-group">
@@ -75,32 +75,97 @@
                                 <input type="text" class="form-control" id="purchase_order_reference" name="purchase_order_reference" placeholder="" value="{{ old('purchase_order_reference') }}" >
                             </div>
 
+                        <legend>Order Items</legend>
+                        <br>
+                        <div class="order">
+                            <div class="typeahead">
+                                <span class="twitter-typeahead">
+                                    <p class="control has-icon has-icon-right">
+                                            <vue-typeahead
+                                                    v-model="value"
+                                                    prefetch="{{url('/api/products/get')}}"
+                                                    :default-suggestion="false"
+                                                    display-key='code'
+                                                    :suggestion-template="myTemplate"
+                                                    classes="form-control "
+                                                    v-on:selected="done">
+
+
+                                            </vue-typeahead>
+                                    </p>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="quote">
+                                <nav class="panel mywidth">
+
+                                    <div class="panel-heading">
+                                        Your Quote <span class="pull-right">Change Qnty.</span>
+                                    </div>
+                                    <div class="panel-block" v-for="(product, index) in orderedproducts.products">
+                                        <article class="media">
+                                            <figure class="media-left">
+                                                <p class="image is-64x64">
+                                                    <img :src="product.imageurl">
+                                                </p>
+                                            </figure>
+                                            <p>
+                                                <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br><del>RRP: £@{{ product.price }}</del> Your price: £@{{product.discountedprice}}
+
+                                                <input type="hidden" name="products[]" :value="product.code">
+                                                <input type="hidden" name="quantities[]" :value="product.quantity">
+                                            </p>
+                                            <p>
+                                                <button type="button" class="button is-small" v-on:click="product.incrementQuantity()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                                <button type="button" class="button is-small" v-on:click="product.decrementQuantity()"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                                            </p>
+                                        </article>
+                                    </div>
+                                    <div class="panel-block">
+                                        <div class="columns is-fullwidth"><span class="column is-one-third">Total: <del>£@{{orderedproducts.getTotalPrice()}}</del></span>
+                                            <span class="column is-offset-two-thirds">After Discount: <b> £ @{{orderedproducts.getDiscountedPrice()}} </b></span></div>
+                                            <input type="hidden" name="order_total" :value="orderedproducts.getDiscountedPrice()">
+                                    </div>
+                                    <div class="panel-block">
+                                        <button type="button" class="button is-primary is-outlined "  v-on:click="clearAll()">
+                                            Clear all items
+                                        </button>
+                                    </div>
+                                </nav>
+                            </div>
+                            <br>
+
+
+
+
+                            <legend>Delivery Details</legend>
+
+
                             <div class="form-group">
-                                <label for="date_of_delivery" class="control-label">Desired delivery date</label>
+                                <label for="date_of_delivery" class="control-label">Desired delivery/collection date</label>
                                 <input type="text" class="form-control" id="datepicker" name="datepicker" placeholder="" value="{{ old('datepicker') }}"  >
                             </div>
 
 
-                            <legend>Delivery Details</legend>
-                                <div class="radio">
+                         <div class="deliverydetails">
+                                <div >
                                     <label>
-                                        <input type="radio" name="delivery" id="delivery1" @click="toggleDeliveryChecked" value="delivery">
+                                        <input type="radio" name="delivery" id="delivery1" @click="toggleDeliveryChecked" @if(old('delivery') == "delivery1") checked @endif value="delivery">
                                         Delivery
                                     </label>
                                 </div>
-                                <div class="radio">
+                                <div >
                                     <label>
-                                        <input type="radio" name="delivery" id="delivery2" @click="unsetDelivery" value="collection">
+                                        <input type="radio" name="delivery" id="delivery2" @click="unsetDelivery" @if(old('delivery') == "delivery2") checked @endif value="collection">
                                         Collection
                                     </label>
                                 </div>
-                                <div class="radio ">
+                                <div >
                                     <label>
-                                        <input type="radio" name="delivery" id="delivery3" @click="unsetDelivery" value="unconfirmed">
+                                        <input type="radio" name="delivery" id="delivery3" @click="unsetDelivery" @if(old('delivery') == "delivery3") checked @endif value="unconfirmed">
                                         Unconfirmed
                                     </label>
                                 </div>
-
 
                                 <div class="checkbox" v-show="deliveryChecked">
                                     <label>
@@ -145,11 +210,17 @@
 
                                     </div>
                                 </div>
+                            </div>
+
+                            <legend>Other Details</legend>
 
 
+                            <div class="form-group" >
+                                <label for="inconterms" class="control-label">Custom details/Incoterms</label>
 
+                                <input type="text" class="form-control" id="incoterms" name="incoterms" placeholder=""  value="{{ old('incoterms')}}">
 
-
+                            </div>
 
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
@@ -159,7 +230,7 @@
                                         <button type="submit" class="btn btn-warning">Submit</button>
                                     </div>
                                 </div>
-
+                        </div>
                     </form>
                 </div>
             </div>
@@ -171,7 +242,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
         $( function() {
-            $( "#datepicker" ).datepicker();
+            $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
         } );
     </script>
 @endsection

@@ -12,13 +12,16 @@ export default class OrderedProducts{
     addProductToOrder(product){
         this.products.push(product);
     }
+    removeFromOrder(product){
+        this.products.pop(product)
+    }
 
     getTotalPrice(){
         var totalprice = 0;
         for(var i=0; i<this.products.length; i++){
             totalprice += (this.products[i].price * this.products[i].quantity);
         }
-        return totalprice;
+        return totalprice.toFixed(2);
     }
 
     getDiscountedPrice(){
@@ -26,7 +29,7 @@ export default class OrderedProducts{
         for(var i=0; i<this.products.length; i++){
             totalprice += (this.products[i].discountedprice * this.products[i].quantity);
         }
-        return totalprice;
+        return totalprice.toFixed(2);
     }
 
 

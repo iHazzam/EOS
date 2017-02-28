@@ -38,7 +38,7 @@
 
                             <!-- Table Body -->
                             <tbody>
-                            @foreach (Auth::user()->order() as $order)
+                            @foreach (Auth::user()->order()->get() as $order)
                                 <tr>
                                     <!-- Name -->
                                     <td class="table-text">
@@ -46,7 +46,7 @@
                                     </td>
                                     <!-- po#-->
                                     <td class="table-text">
-                                        <div>{{ $order->purchase_order_ref }}</div>
+                                        <div>{{ $order->purchase_order_reference }}</div>
                                     </td>
                                     <!-- Order Date -->
                                     <td class="table-text">
@@ -54,16 +54,16 @@
                                     </td>
                                     <!-- Delivery Date -->
                                     <td class="table-text">
-                                        <div>{{ $order->delivery_date->diffForHumans() }}</div>
+                                        <div>{{ $order->delivery_date }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $order->delivery }}</div>
+                                        <div>{{ ucfirst($order->delivery) }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $order->order_total }}</div>
+                                        <div>£{{ $order->order_total }}</div>
                                     </td>
                                     <td class="table-text">
-                                        <div>{{ $order->shipping_total }}</div>
+                                        <div>£{{ $order->shipping_total }}</div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -71,7 +71,7 @@
 <div class="row">
     <div class="form-group  col-xs-2">
         <label for="shipping_percent" class="control-label">Default Shipping Percent</label>
-        <input type="number" min="1" max="100" class="form-control" id="shipping_percent" name="shipping_percent" value="0" placeholder="">
+        <input type="number" min="0" max="100" class="form-control" id="shipping_percent" name="shipping_percent" value="0" placeholder="">
     </div>
     <div class="form-group  col-xs-2">
         <label for="shipping_flat" class="control-label">Default Shipping Flat Fee</label>

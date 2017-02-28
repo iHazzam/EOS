@@ -42,7 +42,7 @@
                 <nav class="panel mywidth">
 
                     <div class="panel-heading">
-                        Your Quote
+                        Your Quote <span class="pull-right">Change Qnty.</span>
                     </div>
                     <div class="panel-block" v-for="product in orderedproducts.products">
                         <article class="media">
@@ -53,10 +53,11 @@
                             </figure>
                             <p>
                                 <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br><del>RRP: £@{{ product.price }}</del> Your price: £@{{product.discountedprice}}
+                                <input type="hidden" :name="product.code" :value="product.quantity">
                             </p>
                             <p>
-                                <button class="button is-small is-success" v-on:click="product.incrementQuantity()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                                <button class="button is-small is-danger" v-on:click="product.decrementQuantity()"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                                <button type="button" class="button is-small" v-on:click="product.incrementQuantity()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                <button type="button" class="button is-small" v-on:click="product.decrementQuantity()"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
                             </p>
                         </article>
                     </div>

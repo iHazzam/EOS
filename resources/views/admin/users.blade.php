@@ -10,14 +10,6 @@
             <li class="active">{{ trans('backpack::base.dashboard') }}</li>
         </ol>
     </section>
-    <div class="flash-message">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if(Session::has('alert-' . $msg))
-
-                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-            @endif
-        @endforeach
-    </div> <!-- end .flash-message -->
 @endsection
 
 
@@ -31,7 +23,7 @@
                     </div>
 
                     <div class="box-body">
-                        @if(is_array($users))
+                        @if($users->first())
                             <table class="table table-striped task-table">
 
                                 <!-- Table Headings -->
@@ -58,11 +50,15 @@
                                         </td>
                                         {{--Number of orders placed--}}
                                         <td class="table-text">
-                                            <div>{{ $user->orders()->count()}}</div>
+                                            <div>{{ $user->order()->count()}}</div>
                                         </td>
                                         <!-- latest order-->
                                         <td class="table-text">
-                                            <div>{{ $user->orders()->pluck()->created_at->diffForHumans() }}</div>
+                                            @if($user->order()->count() != 0)
+                                            <div>{{ $user->order()->first()->created_at->diffForHumans() }}</div>
+                                            @else
+                                            <div>No orders found</div>
+                                            @endif
                                         </td>
                                         <td class="table-text">
                                             <button type="button" class="btn btn-link white_" data-toggle="modal" data-target="#modal{{$user->id}}">Edit/Full info <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>

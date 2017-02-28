@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\OrderPlaced;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Order;
 use App\OrderProduct;
 use ErrorException;
@@ -21,12 +23,13 @@ class OrderController extends Controller
       try
       {
           $this->validate($request,[
-              'address_line1' => 'required',
+              'addr1' => 'required',
               'city' => 'required',
               'postcode' => 'required',
               'email' => 'required',
-              'phone' => 'required',
+              'contact_phone' => 'required',
               'project_name'=>'required',
+              'country'=>'required',
               'purchase_order_reference'=>'required',
               'delivery' => 'required',
               'order_total' => 'required'
@@ -34,28 +37,27 @@ class OrderController extends Controller
           $error = false;
           $order = new Order();
 
-          $order->address_line1 = $request->address_line1;
+          $order->address_line1 = $request->addr1;
           $order->city = $request->city;
           $order->postcode = $request->postcode;
+          $order->country = $request->country;
           $order->email = $request->email;
-          $order->phone = $request->phone;
+          $order->phone = $request->contact_phone;
           $order->project_name = $request->project_name;
           $order->purchase_order_reference = $request->purchase_order_reference;
           $order->delivery = $request->delivery;
           $order->order_total = $request->order_total;
 
-          if($request->has('address_line2'))
+
+          if($request->has('addr2'))
           {
-              $order->address_line2 = $request->address_line2;
+              $order->address_line2 = $request->addr2;
           }
-          if($request->has('delivery_date'))
+          if($request->has('datepicker'))
           {
-              $order->delivery_date = $request->delivery_date;
+              $order->delivery_date = date("y-m-d", strtotime($request->datepicker));
           }
-          if($request->has('shipping_total'))
-          {
-              $order->shipping_total = $request->shipping_total;
-          }
+          $order->shipping_total = ($order->order_total * (Auth::user()->shipping_percent/100))+ Auth::user()->shipping_flat;
           if($request->has('incoterms'))
           {
               $order->incoterms = $request->incoterms;
@@ -63,19 +65,16 @@ class OrderController extends Controller
 
           $order->user_id = Auth::user()->id;
           $order->save();
-          foreach($request->products as $prod)
+          foreach($request->products as $key => $prod)
           {
               $order_product = new OrderProduct();
               $order_product->order_id = $order->id;
-              $order_product->product_code = $prod->product_code;
-              $order_product->quantity = $prod->quantity;
-              if($prod->has('custom_order'))
-              {
-                  $order_product->custom_order = $prod->custom_order;
-              }
+              $order_product->product_code = $prod;
+              $order_product->quantity = $request->quantities[$key];
               $order_product->save();
           }
           $request->session()->flash('alert-success', "Thanks, your order has been placed. This is now viewable on your dashboard and you'll recieve an email confirmation shortly");
+          Auth::user()->notify(new OrderPlaced($order->id));
           return redirect()->back();
       }
         catch(ErrorException $e)

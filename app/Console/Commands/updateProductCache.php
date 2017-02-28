@@ -55,11 +55,14 @@ class updateProductCache extends Command
             {
                 $discountpercent = 0;
             }
+            else{
+                $discountpercent = $discountpercent->discountpercent;
+            }
             $prodjs = [
                 "code" => $product->Code,
                 "name" => $product->Name,
                 "imageurl" => $image,
-                "discountmod" => $discountpercent,
+                "discountmod" => 1-($discountpercent/100),
                 "price" => round($product->Price,2)
                 ];
             $product_json[] = $prodjs; //append it to the big json array

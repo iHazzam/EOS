@@ -33,6 +33,8 @@
     <!-- BackPack Base CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}">
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css">
     @yield('after_styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -78,7 +80,14 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
          @yield('header')
+          <div class="flash-message">
+              @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                  @if(Session::has('alert-' . $msg))
 
+                      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                  @endif
+              @endforeach
+          </div> <!-- end .flash-message -->
         <!-- Main content -->
         <section class="content">
 

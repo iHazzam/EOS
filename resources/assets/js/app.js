@@ -37,7 +37,6 @@ const app = new Vue({
         },
         done: function(data) {
             console.log(data);
-            data.discountmod = 0.6;
             var discountprice = data.price * data.discountmod;
             var newprod = new Product(data.code,data.name,data.price,discountprice,data.imageurl)
             this.orderedproducts.addProductToOrder(newprod);

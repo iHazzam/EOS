@@ -11224,7 +11224,6 @@ const app = new Vue({
         },
         done: function (data) {
             console.log(data);
-            data.discountmod = 0.6;
             var discountprice = data.price * data.discountmod;
             var newprod = new __WEBPACK_IMPORTED_MODULE_2__classes_Product_js__["a" /* default */](data.code, data.name, data.price, discountprice, data.imageurl);
             this.orderedproducts.addProductToOrder(newprod);
@@ -12191,7 +12190,6 @@ var Bloodhound = __webpack_require__(36);
     },
     formatValue: function () {
       this.$refs.input.value = this.value;
-      this.input = "";
     },
     transformer: function (response) {
       if (this.responseWrapper) {
@@ -12330,7 +12328,7 @@ class OrderedProducts {
         for (var i = 0; i < this.products.length; i++) {
             totalprice += this.products[i].price * this.products[i].quantity;
         }
-        return totalprice;
+        return totalprice.toFixed(2);
     }
 
     getDiscountedPrice() {
@@ -12338,7 +12336,7 @@ class OrderedProducts {
         for (var i = 0; i < this.products.length; i++) {
             totalprice += this.products[i].discountedprice * this.products[i].quantity;
         }
-        return totalprice;
+        return totalprice.toFixed(2);
     }
 
 }
