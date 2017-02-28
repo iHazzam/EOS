@@ -3,7 +3,7 @@
 @section('header')
     <section class="content-header">
         <h1>
-            Playdale Export Order System<small>Place new orders and see existing orders for your playgrounds! </small>
+            Playdale Export Order System<small>Place new orders and see existing orders for your playgrounds!</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}">{{ config('backpack.base.project_name') }}</a></li>
