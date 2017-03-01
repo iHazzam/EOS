@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/phpinfo', function (){
-   dd(phpinfo());
-});
-
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/','PagesController@showDashboard');
