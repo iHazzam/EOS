@@ -17,9 +17,9 @@ class OrderPlaced extends Notification
      * @return void
      */
     protected $order;
-    public function __construct(Order $order)
+    public function __construct($orderid)
     {
-        $this->order = $order;
+        $this->order = Order::find($orderid);
     }
 
     /**
