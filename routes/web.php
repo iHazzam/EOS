@@ -25,18 +25,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/user/settings/post','PagesController@postUserSettings');
 });
 
-Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin'], function(){
     //uses admin middleware, prefixed /admin/
-    Route::get('/users','AdminController@showUsers');
-    Route::get('/settings','AdminController@showAdminSettings');
-    Route::get('/orders', 'AdminController@showOrders');
+    Route::get('/users','AdminController@showUsers')->middleware(['auth','magikarp']);
+    Route::get('/settings','AdminController@showAdminSettings')->middleware(['auth','magikarp']);
+    Route::get('/orders', 'AdminController@showOrders')->middleware(['auth','magikarp']);
 
-    Route::get('/settings/post','AdminController@postAdminSettings');
-    Route::get('/create/user','AdminController@showCreateUserForm');
-    Route::post('/create/user/post','AdminController@createUser');
-    Route::get('/edit/{user}','AdminController@showEditForm');
-    Route::put('/edit/{user}/post','AdminController@editUser');
-    Route::delete('/delete/user/{user}','AdminController@deleteUser');
+    Route::get('/settings/post','AdminController@postAdminSettings')->middleware(['auth','magikarp']);
+    Route::get('/create/user','AdminController@showCreateUserForm')->middleware(['auth','magikarp']);
+    Route::post('/create/user/post','AdminController@createUser')->middleware(['auth','magikarp']);
+    Route::get('/edit/{user}','AdminController@showEditForm')->middleware(['auth','magikarp']);
+    Route::put('/edit/{user}/post','AdminController@editUser')->middleware(['auth','magikarp']);
+    Route::delete('/delete/user/{user}','AdminController@deleteUser')->middleware(['auth','magikarp']);
     
 
 });

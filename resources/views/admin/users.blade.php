@@ -88,10 +88,23 @@
                                         <h4 class="modal-title" id="myModalLabel">{{$user->company_name }} Full Details/Edit</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <editinfo></editinfo> <!-- vue component to make -->
+                                        <form action="{{url('admin/edit/user/'. $user->id)}}" method="POST">
+                                            {{ csrf_field() }}
+
+
+                                            @include('admin/forms/useredit')
+
+
+
+
+
+
+                                            <button type="submit" id="edit-{{ $user->id }}" class="btn btn-warning">
+                                                <i class="fa fa-btn fa-pencil-square-o "></i>Edit
+                                            </button>
+                                        </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button id="{{$user->id}}" class="btn btn-warning">Save Changes!</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>

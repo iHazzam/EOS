@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class admin
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -22,7 +22,8 @@ class admin
         }
         elseif(Auth::check())
         {
-            return redirect('/dashboard')->with('error','Your account has insufficient permissions to access this page. If you believe this is an error, please let us know!');
+            $request->session()->flash('alert-danger', "Your account has insufficient permissions to access this page. If you believe this is an error, please let us know!");
+            return redirect('/');
         }
         else{
             return redirect('/login');

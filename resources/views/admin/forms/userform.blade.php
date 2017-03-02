@@ -34,36 +34,36 @@
 
 </div>
 
-<legend>Delivery Details</legend>
+<legend>Billing Details</legend>
 <div class="row">
     <div class="form-group  col-xs-4" >
-        <label for="address_line1" class="control-label">Delivery Address Line 1</label>
+        <label for="address_line1" class="control-label">Billing Address Line 1</label>
 
         <input type="text" class="form-control" id="address_line1" name="address_line1" placeholder=""  required="" >
 
     </div>
     <div class="form-group  col-xs-4">
-        <label for="address_line2" class="control-label">Delivery Address Line 2</label>
+        <label for="address_line2" class="control-label">Billing Address Line 2</label>
 
         <input type="text" class="form-control" id="address_line2" name="address_line2" placeholder="">
 
     </div>
     <div class="form-group  col-xs-4">
-        <label for="city" class="control-label">Delivery Address City</label>
+        <label for="city" class="control-label">Billing Address City</label>
 
         <input type="text" class="form-control" id="city" name="city"  placeholder="" required="">
 
 
     </div>
     <div class="form-group  col-xs-4">
-        <label for="postcode" class="control-label">Delivery Address Postcode</label>
+        <label for="postcode" class="control-label">Billing Address Postcode</label>
 
         <input type="text" class="form-control" id="postcode" name="postcode"  placeholder="" required="" >
 
 
     </div>
     <div class="form-group  col-xs-4">
-        <label for="country" class="control-label">Delivery Address Country</label>
+        <label for="country" class="control-label">Billing Address Country</label>
 
         <input type="text" class="form-control" id="country" name="country" placeholder="" required="">
     </div>
