@@ -103,7 +103,53 @@ class AdminController extends Controller
     }
     public function editUser(Request $request, User $user)
     {
-        //todo: process edit user form
+        try{
+            $rules = [
+                'contact_name' => 'required',
+                'company_name'  => 'required',
+                'contact_phone' => 'required',
+                'email' => 'required',
+                'address_line1' => 'required',
+                'city' => 'required',
+                'postcode' => 'required',
+                'country' => 'required',
+                'default_currency' => 'required',
+                'sage_uid' => 'required'
+            ];
+
+            $this->validate($request,$rules);
+
+            $user->contact_name = $request->contact_name;
+            $user->company_name = $request->company_name;
+            $user->contact_phone = $request->contact_phone;
+            $user->email = $request->email;
+            $user->address_line1 = $request->address_line1;
+            $user->city = $request->city;
+            $user->postcode = $request->postcode;
+            $user->country = $request->country;
+            $user->default_currency = $request->default_currency;
+            $user->sage_uid = $request->sage_uid;
+
+            if($request->has('address_line2'))
+            {
+                $user->address_line2 = $request->address_line2;
+            }
+            if($request->has('shipping_percent'))
+            {
+                $user->shipping_percent = $request->shipping_percent;
+            }
+            if($request->has('shipping_flat'))
+            {
+                $user->shipping_flat = $request->shipping_flat;
+            }
+            $user->save();
+            $request->session()->flash('alert-success', "User Edited Successfully");
+            return redirect()->back();}
+        catch (QueryException $e){
+            $request->session()->flash('alert-danger', "Account not edited. Please try again");
+            return redirect()->back();
+        }
+
     }
     public function deleteUser(Request $request, User $user )
     {
@@ -123,7 +169,7 @@ class AdminController extends Controller
     }
     public function editOrder(Request $request, User $user)
     {
-        //todo: process edit user form
+        
     }
     public function deleteOrder(Request $request, Order $order)
     {

@@ -91,7 +91,6 @@
                                         <form action="{{url('admin/edit/user/'. $user->id)}}" method="POST">
                                             {{ csrf_field() }}
 
-
                                             @include('admin/forms/useredit')
 
 

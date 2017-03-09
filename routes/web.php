@@ -34,10 +34,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/settings/post','AdminController@postAdminSettings')->middleware(['auth','magikarp']);
     Route::get('/create/user','AdminController@showCreateUserForm')->middleware(['auth','magikarp']);
     Route::post('/create/user/post','AdminController@createUser')->middleware(['auth','magikarp']);
-    Route::get('/edit/{user}','AdminController@showEditForm')->middleware(['auth','magikarp']);
-    Route::put('/edit/{user}/post','AdminController@editUser')->middleware(['auth','magikarp']);
+    Route::post('/edit/user/{user}','AdminController@editUser')->middleware(['auth','magikarp']);
     Route::delete('/delete/user/{user}','AdminController@deleteUser')->middleware(['auth','magikarp']);
-    
+    Route::delete('/delete/order/{order}','AdminController@deleteOrder')->middleware(['auth','magikarp']);
 
 });
 

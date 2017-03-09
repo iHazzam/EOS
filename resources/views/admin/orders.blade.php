@@ -23,20 +23,20 @@
                     </div>
 
                     <div class="box-body">
-                    @if(is_array($orders))
+                    @if($orders->first())
                     <table class="table table-striped task-table">
 
                         <!-- Table Headings -->
                         <thead>
                         <th>Order ID</th>
                         <th>Purchase Order Ref#</th>
-                        <th>Company placed</th>
+                        <th>Company Name</th>
                         <th>Project Name</th>
                         <th>Order cost</th>
-                        <th>Shipping method</th>
                         <th>Delivery date</th>
+                        <th>Shipping method</th>
+                        <th>Order cost</th>
                         <th>Shipping cost</th>
-                        <th>Total cost</th>
                         <th>Full Details/Edit</th>
                         <th>Delete</th>
                         </thead>
@@ -52,35 +52,33 @@
                                 <td class="table-text">
                                     <div>{{ $order->purchase_order_reference}}</div>
                                 </td>
-                                <!-- Contact -->
-                                {{--Number of orders placed--}}
                                 <td class="table-text">
-                                    <div>{{ $order->project_name}}</div>
+                                    <div>{{ $order->user()->first()->company_name }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $order->user()->company_name }}</div>
+                                    <div>{{ $order->project_name}}</div>
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $order->order_total}}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $order->orders()->delivery_date->diffForHumans() }}</div>
+                                    <div>{{ $order->delivery_date }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $order->delivery}}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $order->shipping_total}}</div>
+                                    <div>{{ucfirst($order->delivery)}}</div>
                                 </td>
                                 <!-- latest order-->
                                 <td class="table-text">
-                                    <div>{{ $order->shipping_total + $order->order_total}}</div>
+                                    <div>{{ $order->order_total}}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $order->shipping_total}}</div>
                                 </td>
                                 <td class="table-text">
                                     <button type="button" class="btn btn-link white_" data-toggle="modal" data-target="#modal{{$order->id}}">Edit/Full info <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
                                 </td>
                                 <td>
-                                    <form action="{{ url('admin/delete/user/'.$order->id) }}" method="POST">
+                                    <form action="{{ url('admin/delete/order/'.$order->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\OrderPlaced;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Order;
@@ -26,6 +26,7 @@ class OrderController extends Controller
               'addr1' => 'required',
               'city' => 'required',
               'postcode' => 'required',
+              'name_on_order' => 'required',
               'email' => 'required',
               'contact_phone' => 'required',
               'project_name'=>'required',
@@ -39,6 +40,7 @@ class OrderController extends Controller
 
           $order->address_line1 = $request->addr1;
           $order->city = $request->city;
+          $order->contact_name = $request->name_on_order;
           $order->postcode = $request->postcode;
           $order->country = $request->country;
           $order->email = $request->email;
@@ -62,23 +64,31 @@ class OrderController extends Controller
           {
               $order->incoterms = $request->incoterms;
           }
-
+          if($request->has('custom'))
+          {
+              $order->custom = $request->custom;
+          }
           $order->user_id = Auth::user()->id;
-          $order->save();
+          $oid = $order->save();
           foreach($request->products as $key => $prod)
           {
               $order_product = new OrderProduct();
               $order_product->order_id = $order->id;
               $order_product->product_code = $prod;
               $order_product->quantity = $request->quantities[$key];
+              $order_product->price = $request->prices[$key];
               $order_product->save();
           }
+          $gen = Artisan::call('order:generate',['order' => $order->id]);
+          dd($gen);
           $request->session()->flash('alert-success', "Thanks, your order has been placed. This is now viewable on your dashboard and you'll recieve an email confirmation shortly");
           Auth::user()->notify(new OrderPlaced($order->id));
+          dd('comes here');
           return redirect()->back();
       }
         catch(ErrorException $e)
         {
+            dd($e);
             $request->session()->flash('alert-danger',$e);
             return redirect()->back()->withInput(Input::all())->withErrors($e);
         }

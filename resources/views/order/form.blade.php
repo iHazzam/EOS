@@ -114,6 +114,7 @@
 
                                                 <input type="hidden" name="products[]" :value="product.code">
                                                 <input type="hidden" name="quantities[]" :value="product.quantity">
+                                                <input type="hidden" name="prices[]" :value="product.discountedprice">
                                             </p>
                                             <p>
                                                 <button type="button" class="button is-small" v-on:click="product.incrementQuantity()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
@@ -134,7 +135,12 @@
                                 </nav>
                             </div>
                             <br>
+                            <div class="form-group" >
+                                <label for="custom" class="control-label">Custom details</label>
 
+                                <input type="text" class="form-control" id="custom" name="custom" placeholder=""  value="{{ old('custom')}}">
+
+                            </div>
 
 
 
@@ -216,7 +222,7 @@
 
 
                             <div class="form-group" >
-                                <label for="inconterms" class="control-label">Custom details/Incoterms</label>
+                                <label for="inconterms" class="control-label">Incoterms</label>
 
                                 <input type="text" class="form-control" id="incoterms" name="incoterms" placeholder=""  value="{{ old('incoterms')}}">
 
