@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\OrderEdited;
 use App\Notifications\UserCreated;
 use App\OrderProduct;
 use Illuminate\Database\QueryException;
@@ -234,7 +235,7 @@ class AdminController extends Controller
                 $order->custom = null;
             }
             $oid = $order->save();
-            $order_products = OrderProduct::where('order_id','=',$order->id);
+            $order_products = OrderProduct::where('order_id','=',$order->id)->delete();
             foreach($request->products as $key => $prod)
             {
                 $order_product = new OrderProduct();
@@ -245,7 +246,7 @@ class AdminController extends Controller
                 $order_product->save();
             }
             $request->session()->flash('alert-warning', "This order has now been updated - please rememeber this must also be manually updated in Sage.");
-            Auth::user()->notify(new OrderPlaced($order->id));
+            Auth::user()->notify(new OrderEdited($order->id));
             return redirect()->back();
         }
         catch(ErrorException $e)

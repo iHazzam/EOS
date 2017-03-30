@@ -55,7 +55,7 @@
         </thead>
         <tbody>
             @foreach($order->order_product()->get() as $item)
-                <tr>
+                <tr id="tr-{{$item->id}}">
                     <td><input  name="products[]" value="{{$item->product_code}}" class="smallinput"></td>
                     <td><input  name="quantities[]" value="{{$item->quantity}}" class="smallinput"></td>
                     <td><input  name="prices[]" value="{{$item->price}}" class="smallinput"></td>
@@ -65,6 +65,9 @@
                             <option value="gbp" @if($item->currency == "gbp") selected @endif> GBP </option>
                             <option value="usd" @if($item->currency == "usd") selected @endif> USD </option>
                         </select>
+                    </td>
+                    <td>
+                        <button type="button" class="button is-small" v-on:click="removeRow()"><i class="fa fa-times" aria-hidden="true"></i></button>
                     </td>
                 </tr>
             @endforeach

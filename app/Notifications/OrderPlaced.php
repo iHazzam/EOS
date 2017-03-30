@@ -46,7 +46,6 @@ class OrderPlaced extends Notification
             ->subject('Order Placed')
             ->line('New order #'.$this->order->id.' was just placed!')
             ->action('Log in to see your order!', url('/'))
-            ->line('Your username and password are:'  )
             ->line('Purchase order ref: ' . $this->order->purchase_order_reference)
             ->line('Total price (not including shipping) '. $this->order->order_total);
     }

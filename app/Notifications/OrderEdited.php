@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
+use App\Order;
 class OrderEdited extends Notification
 {
     use Queueable;
@@ -16,9 +16,10 @@ class OrderEdited extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $order;
+    public function __construct($orderid)
     {
-        //
+        $this->order = Order::find($orderid);
     }
 
     /**
@@ -41,9 +42,12 @@ class OrderEdited extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+            ->from('EOS@playdale.me')
+            ->subject('Order Edited')
+            ->line('Order #'.$this->order->id.' was just edited!')
+            ->action('Log in now to see your order!', url('/'))
+            ->line('Purchase order ref: ' . $this->order->purchase_order_reference)
+            ->line('Total price (not including shipping) '. $this->order->order_total);
     }
 
     /**

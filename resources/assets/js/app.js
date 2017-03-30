@@ -35,6 +35,9 @@ const app = new Vue({
         clearAll: function(){
           this.orderedproducts = new OrderedProducts();
         },
+        removeRow: function(){
+
+        },
         done: function(data) {
             console.log(data);
             var discountprice = data.price * data.discountmod;
