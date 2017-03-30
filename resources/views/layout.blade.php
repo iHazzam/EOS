@@ -11,6 +11,10 @@
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <script>
+        var op2 = [];
+    </script>
     <title>
       {{ isset($title) ? $title : 'Playdale | Export Order System' }}
     </title>

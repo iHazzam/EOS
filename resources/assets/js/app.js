@@ -5,12 +5,12 @@ import Product from './classes/Product.js';
 
 var MyComponent = require('./components/VueTypeahead.vue');
 Vue.component('vueTypeahead', MyComponent);
-
 const app = new Vue({
     el: '#root',
     data: {
         defaultContact : false,
         orderedproducts: new OrderedProducts(),
+        orderedproducts2: op2,
         deliveryChecked: false,
         defaultDelivery : false,
         label:'',

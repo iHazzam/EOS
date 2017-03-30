@@ -80,10 +80,8 @@ class OrderController extends Controller
               $order_product->save();
           }
           $gen = Artisan::call('order:generate',['order' => $order->id]);
-          dd($gen);
           $request->session()->flash('alert-success', "Thanks, your order has been placed. This is now viewable on your dashboard and you'll recieve an email confirmation shortly");
           Auth::user()->notify(new OrderPlaced($order->id));
-          dd('comes here');
           return redirect()->back();
       }
         catch(ErrorException $e)

@@ -101,16 +101,32 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
                                     <h4 class="modal-title" id="myModalLabel">{{$order->company_name }} Full Details/Edit</h4>
                                 </div>
+                                <form action="{{url('admin/edit/order/'. $order->id)}}" method="POST">
+                                    {{ csrf_field() }}
                                 <div class="modal-body">
-                                    <editinfo></editinfo> <!-- vue component to make -->
+
+
+                                        @include('admin/forms/orderedit')
+
+
+
+
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="{{$order->id}}" class="btn btn-warning">Save Changes!</button>
+                                    <button type="submit" id="edit-{{ $order->id }}" class="btn btn-warning">
+                                        <i class="fa fa-btn fa-pencil-square-o "></i>Edit
+                                    </button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
+
+
+
+
+                                </form>
                             </div>
                         </div>
                     </div>
+
                 @endforeach
 
         </div>

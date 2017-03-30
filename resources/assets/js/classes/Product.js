@@ -19,5 +19,13 @@ export default class Product{
         this.quantity -= 1;
     }
 
+    isQuantity1()
+    {
+        if(this.quantity == 1)
+        {
+            return true;
+        }
+        else return false;
 
+    }
 }

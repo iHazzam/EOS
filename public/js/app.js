@@ -11193,12 +11193,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var MyComponent = __webpack_require__(37);
 Vue.component('vueTypeahead', MyComponent);
-
 const app = new Vue({
     el: '#root',
     data: {
         defaultContact: false,
         orderedproducts: new __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__["a" /* default */](),
+        orderedproducts2: op2,
         deliveryChecked: false,
         defaultDelivery: false,
         label: '',
@@ -12322,6 +12322,9 @@ class OrderedProducts {
     addProductToOrder(product) {
         this.products.push(product);
     }
+    removeFromOrder(product) {
+        this.products.pop(product);
+    }
 
     getTotalPrice() {
         var totalprice = 0;
@@ -12367,6 +12370,12 @@ class Product {
         this.quantity -= 1;
     }
 
+    isQuantity1() {
+        console.log(this.quantity);
+        if (this.quantity == 1) {
+            return true;
+        } else return false;
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Product;
 

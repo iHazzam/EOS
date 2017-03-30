@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/edit/user/{user}','AdminController@editUser')->middleware(['auth','magikarp']);
     Route::delete('/delete/user/{user}','AdminController@deleteUser')->middleware(['auth','magikarp']);
     Route::delete('/delete/order/{order}','AdminController@deleteOrder')->middleware(['auth','magikarp']);
+    Route::post('/edit/order/{order}','AdminController@editOrder')->middleware(['auth','magikarp']);
 
 });
 

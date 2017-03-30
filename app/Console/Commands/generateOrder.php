@@ -131,8 +131,5 @@ class generateOrder extends Command
             });
 
         })->store('csv',storage_path('excel/exports'));
-        dd('comes here');
-
-
     }
 }
