@@ -11222,6 +11222,7 @@ const app = new Vue({
         clearAll: function () {
             this.orderedproducts = new __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__["a" /* default */]();
         },
+        removeRow: function () {},
         done: function (data) {
             console.log(data);
             var discountprice = data.price * data.discountmod;
@@ -12371,7 +12372,6 @@ class Product {
     }
 
     isQuantity1() {
-        console.log(this.quantity);
         if (this.quantity == 1) {
             return true;
         } else return false;
@@ -15105,7 +15105,7 @@ var Component = __webpack_require__(38)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/EOS/resources/assets/js/components/VueTypeahead.vue"
+Component.options.__file = "/home/vagrant/Code/eos/resources/assets/js/components/VueTypeahead.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VueTypeahead.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -15116,9 +15116,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f64baf2", Component.options)
+    hotAPI.createRecord("data-v-17307712", Component.options)
   } else {
-    hotAPI.reload("data-v-7f64baf2", Component.options)
+    hotAPI.reload("data-v-17307712", Component.options)
   }
 })()}
 
@@ -15212,7 +15212,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7f64baf2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-17307712", module.exports)
   }
 }
 
