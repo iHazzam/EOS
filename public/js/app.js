@@ -11228,9 +11228,7 @@ const app = new Vue({
             this.orderedproducts = new __WEBPACK_IMPORTED_MODULE_1__classes_OrderedProducts_js__["a" /* default */]();
             this.updateDeliveryCost();
         },
-        removeRow: function () {
-            this.updateDeliveryCost();
-        },
+        removeRow: function () {},
         done: function (data) {
             console.log(this.currencies[this.currency]);
             var currencymod = this.currencies[this.currency];
@@ -11313,7 +11311,7 @@ const app = new Vue({
         }
     },
     created: function () {
-        axios.get('http://playdale.app/api/currencies/get').then(response => {
+        axios.get('http://playdale.me/api/currencies/get').then(response => {
             this.currencies = response.data;
         });
     }
