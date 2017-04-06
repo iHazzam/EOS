@@ -57,5 +57,5 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
-Route::get('/api/products/get','apiController@getProducts');
-Route::get('/api/currencies/get','apiController@getCurrencies');
+Route::get('/api/products/get','apiController@getProducts')->middleware(['cors']);
+Route::get('/api/currencies/get','apiController@getCurrencies')->middleware(['cors']);
