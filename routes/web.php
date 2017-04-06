@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin'], function(){
     //uses admin middleware, prefixed /admin/
     Route::get('/users','AdminController@showUsers')->middleware(['auth','magikarp']);
     Route::get('/settings','AdminController@showAdminSettings')->middleware(['auth','magikarp']);
+    Route::post('/settings/image','AdminController@postImageUpload')->middleware(['auth','magikarp']);
     Route::get('/orders', 'AdminController@showOrders')->middleware(['auth','magikarp']);
 
     Route::get('/settings/post','AdminController@postAdminSettings')->middleware(['auth','magikarp']);
@@ -57,3 +58,4 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::get('/api/products/get','apiController@getProducts');
+Route::get('/api/currencies/get','apiController@getCurrencies');

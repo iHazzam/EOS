@@ -61,7 +61,7 @@
                     <td><input  name="prices[]" value="{{$item->price}}" class="smallinput"></td>
                     <td>
                         <select>
-                            <option value="eur" @if($item->currency == "eur") selected @endif> Euro </option>
+                            <option value="eur" @if($item->currency == "eur") selected @endif> EUR </option>
                             <option value="gbp" @if($item->currency == "gbp") selected @endif> GBP </option>
                             <option value="usd" @if($item->currency == "usd") selected @endif> USD </option>
                         </select>

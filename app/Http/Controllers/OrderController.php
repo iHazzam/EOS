@@ -59,7 +59,14 @@ class OrderController extends Controller
           {
               $order->delivery_date = date("y-m-d", strtotime($request->datepicker));
           }
-          $order->shipping_total = ($order->order_total * (Auth::user()->shipping_percent/100))+ Auth::user()->shipping_flat;
+          if($request->has('shipping_total'))
+          {
+              $order->shipping_total = $request->shipping_total;
+          }
+          else
+          {
+              $order->shipping_total = 0;
+          }
           if($request->has('incoterms'))
           {
               $order->incoterms = $request->incoterms;
@@ -67,6 +74,10 @@ class OrderController extends Controller
           if($request->has('custom'))
           {
               $order->custom = $request->custom;
+          }
+          if($request->has('currency'))
+          {
+              $order->currency = strtolower($request->currency);
           }
           $order->user_id = Auth::user()->id;
           $oid = $order->save();

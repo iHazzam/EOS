@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Notifications\OrderEdited;
 use App\Notifications\UserCreated;
 use App\OrderProduct;
+use App\Product_Image;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\User;
@@ -272,6 +273,33 @@ class AdminController extends Controller
     {
         return view('admin.showsettings');
     }
+    public function postImageUpload(Request $request)
+    {
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_code' => 'required',
+            'filename' => 'required|min:3',
+        ]);
+        $f1 = $request->filename[0];
+        $f2 = $request->filename[1];
+        $filename = $request->filename . "_" . time(). ".".$request->image->getClientOriginalExtension();
+        $request->image->move(storage_path("app/public/images/" . $f1 . "/" . $f2), $filename);
+        $path = "/" . $f1 . "/" . $f2 . "/" . $filename;
+        $pi = Product_Image::where('code','=',$request->product_code)->first();
+        if($pi != null)
+        {
+            $pi->path = $path;
+        }
+        else{
+            $pi = new Product_Image();
+            $pi->code = $request->product_code;
+            $pi->path = $path;
+        }
+        $pi->save();
 
+        return back()
+            ->with('success','Image Uploaded successfully.')
+            ->with('path',$path);
+    }
 
 }

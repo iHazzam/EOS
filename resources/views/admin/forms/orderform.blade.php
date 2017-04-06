@@ -48,6 +48,28 @@
     <input type="text" class="form-control" id="purchase_order_reference" name="purchase_order_reference" placeholder="" value="{{ old('purchase_order_reference') }}" >
 </div>
 
+<div class="form-group">
+    <span><b>Currency to use for this order</b> Warning: Changing the currency will reset items ordered</span>
+    <div>
+        <label>
+            <input type="radio" name="currency" id="GBP"  @if(old('currency') == "GBP") checked @endif value="GBP" v-on:click="clickProtocol" v-model="currency">
+            GBP (£)
+        </label>
+    </div>
+    <div >
+        <label>
+            <input type="radio" name="currency" id="EUR"  @if(old('currency') == "EUR") checked @endif value="EUR" v-on:click="clickProtocol" v-model="currency">
+            EUR (€)
+        </label>
+    </div>
+    <div >
+        <label>
+            <input type="radio" name="currency" id="USD"  @if(old('currency') == "USD") checked @endif value="USD" v-on:click="clickProtocol" v-model="currency">
+            USD ($)
+        </label>
+    </div>
+</div>
+
 <legend>Order Items</legend>
 <br>
 <div class="order">
@@ -83,24 +105,24 @@
                         </p>
                     </figure>
                     <p>
-                        <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br><del>RRP: £@{{ product.price }}</del> Your price: £@{{product.discountedprice}}
+                        <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br><del>RRP: @{{currencySymbol}}@{{ product.price }}</del> Your price: @{{currencySymbol}}@{{product.discountedprice}}
 
                         <input type="hidden" name="products[]" :value="product.code">
                         <input type="hidden" name="quantities[]" :value="product.quantity">
                         <input type="hidden" name="prices[]" :value="product.discountedprice">
                     </p>
                     <p>
-                        <button type="button" class="button is-small" v-on:click="product.incrementQuantity()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                        <button type="button" class="button is-small" v-on:click="product.decrementQuantity()" :disabled="product.isQuantity1()"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                        <button type="button" class="button is-small" v-on:click="return function(){ product.incrementQuantity(); updateDeliveryCost();}()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                        <button type="button" class="button is-small" v-on:click="return function(){ product.decrementQuantity(); updateDeliveryCost();}()" :disabled="product.isQuantity1()"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
                     </p>
                     <p>
-                        <button type="button" class="button is-small is-danger is-outlined" v-on:click="orderedproducts.removeFromOrder(product)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="button is-small is-danger is-outlined" v-on:click="return function(){ orderedproducts.removeFromOrder(product); updateDeliveryCost();}()"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </p>
                 </article>
             </div>
             <div class="panel-block">
-                <div class="columns is-fullwidth"><span class="column is-one-third">Total: <del>£@{{orderedproducts.getTotalPrice()}}</del></span>
-                    <span class="column is-offset-two-thirds">After Discount: <b> £ @{{orderedproducts.getDiscountedPrice()}} </b></span></div>
+                <div class="columns is-fullwidth"><span class="column is-one-third">Total: <del>@{{currencySymbol}}@{{orderedproducts.getTotalPrice()}}</del></span>
+                    <span class="column is-offset-two-thirds">After Discount: <b> @{{currencySymbol}}@{{orderedproducts.getDiscountedPrice()}} </b></span></div>
                 <input type="hidden" name="order_total" :value="orderedproducts.getDiscountedPrice()">
             </div>
             <div class="panel-block">
@@ -124,7 +146,7 @@
 
 
     <div class="form-group">
-        <label for="date_of_delivery" class="control-label">Desired delivery/collection date</label>
+        <label for="date_of_delivery" class="control-label">Prefered despatch date</label>
         <input type="text" class="form-control" id="datepicker" name="datepicker" placeholder="" value="{{ old('datepicker') }}"  >
     </div>
 
@@ -148,6 +170,22 @@
                 Unconfirmed
             </label>
         </div>
+
+        <div class="deliveryquote">
+            <nav class="panel mywidth2">
+                <div class="panel-heading">
+                    Your Delivery Quote
+                </div>
+                <div class="panel-block">
+                    <div class="columns is-fullwidth"><span class="column is-one-third">Total: @{{currencySymbol}}@{{getDeliveryCost}}</span>
+                        <input type="hidden" name="shipping_total" :value="getDeliveryCost">
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+
 
         <div class="checkbox" v-show="deliveryChecked">
             <label>

@@ -108,4 +108,27 @@ class updateProductCache extends Command
             }
         }
     }
+    //TODO: Currency parse is not complete
+    private function parseCurrencyOptions()
+    {
+//        $currency_options = DB::connection('sqlsrv')->table('dbo.SYSCurrency')->get();
+//        foreach($currency_options as $curr)
+//        {
+//            if($fish = Currency::where('id','=',$curr->id)->first())
+//            {
+//                $modifier = $curr->
+//                if($fish->modifier != $->DiscountPercentValue)
+//                {
+//                    $fish->discountpercent = $db->DiscountPercentValue;
+//                    $fish->save();
+//                }
+//            }
+//            else{
+//                $fish = new Discount();
+//                $fish->id = $db->Code;
+//                $fish->discountpercent = $db->DiscountPercentValue;
+//                $fish->save();
+//            }
+//        }
+    }
 }

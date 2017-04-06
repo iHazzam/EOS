@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
         $( function() {
-            $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+            $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy', minDate: "+1M" });
         } );
     </script>
 @endsection

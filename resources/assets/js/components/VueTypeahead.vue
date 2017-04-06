@@ -71,7 +71,7 @@
       responseWrapper: {
         type: String,
         default: ''
-      }
+      },
     },
     watch:{
       local: function(newVal) {
