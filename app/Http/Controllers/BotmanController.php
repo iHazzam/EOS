@@ -13,7 +13,7 @@ class BotmanController extends Controller
     public function handle()
     {
         $botman = app('botman');
-        $botman->verifyServices(env('TOKEN_VERIFY'));
+        $botman->verifyServices('harry_messenger_botman_webhook');
 
         // Simple respond method
         $botman->hears('Hello', function (BotMan $bot) {

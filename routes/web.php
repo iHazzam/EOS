@@ -45,9 +45,9 @@ Route::group(['prefix' => 'admin'], function(){
     // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm');
 $this->post('login', 'Auth\LoginController@login');
-$this->get('logout', 'Auth\LoginController@logout');
-Route::get('/webhook','BotmanController@webhook');
-Route::match(['get', 'post'], '/botman', 'BotmanController@handle');
+//$this->get('logout', 'Auth\LoginController@logout');
+//Route::get('/webhook','BotmanController@webhook');
+Route::match(['get', 'post'], '/webhook', 'BotmanController@handle');
 // Registration Routes... - DISABLED
 //$this->get('register', 'Auth\RegisterController@showRegistrationForm');
 //$this->post('register', 'Auth\RegisterController@register');
