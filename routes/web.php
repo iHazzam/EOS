@@ -47,7 +47,8 @@ $this->get('login', 'Auth\LoginController@showLoginForm');
 $this->post('login', 'Auth\LoginController@login');
 //$this->get('logout', 'Auth\LoginController@logout');
 //Route::get('/webhook','BotmanController@webhook');
-Route::match(['get', 'post'], '/webhook', 'BotmanController@handle');
+Route::get('/webhook', 'BotmanController@handle');
+Route::post('/webhook','BotmanController@handle');
 // Registration Routes... - DISABLED
 //$this->get('register', 'Auth\RegisterController@showRegistrationForm');
 //$this->post('register', 'Auth\RegisterController@register');
