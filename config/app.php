@@ -168,6 +168,7 @@ return [
          */
         Backpack\Base\BaseServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Mpociot\BotMan\BotManServiceProvider::class,
         //
 
         /*
@@ -198,6 +199,7 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
+        'BotMan' => Mpociot\BotMan\Facades\BotMan::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,

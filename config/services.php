@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'botman' => [
+        'facebook_token' => 'YOUR-FACEBOOK-TOKEN-HERE',
+        'facebook_app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE', // Optional - this is used to verify incoming API calls,
+    ],
 
 ];

@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin'], function(){
 $this->get('login', 'Auth\LoginController@showLoginForm');
 $this->post('login', 'Auth\LoginController@login');
 $this->get('logout', 'Auth\LoginController@logout');
-
+Route::get('/webhook','BotmanController@webhook');
 // Registration Routes... - DISABLED
 //$this->get('register', 'Auth\RegisterController@showRegistrationForm');
 //$this->post('register', 'Auth\RegisterController@register');
