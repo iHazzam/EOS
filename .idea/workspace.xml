@@ -6,7 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d74202a-683e-4c88-bf53-2588f3f12233" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/botman.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/botman.php" afterPath="$PROJECT_DIR$/routes/botman.php" />
     </list>
     <ignored path="EOS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -147,7 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Order.php" />
         <option value="$PROJECT_DIR$/database/migrations/2017_02_28_121526_add_soft_deletes_to_users.php" />
         <option value="$PROJECT_DIR$/database/migrations/2017_02_28_121539_add_soft_deletes_to_orders.php" />
@@ -198,6 +197,7 @@
         <option value="$PROJECT_DIR$/config/services.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BotmanController.php" />
+        <option value="$PROJECT_DIR$/routes/botman.php" />
       </list>
     </option>
   </component>
@@ -971,12 +971,12 @@
       <workItem from="1491476058002" duration="30838000" />
       <workItem from="1492088634174" duration="255000" />
       <workItem from="1492088921477" duration="619000" />
-      <workItem from="1493718189255" duration="6000000" />
+      <workItem from="1493718189255" duration="6171000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="286702000" />
+    <option name="totallyTimeSpent" value="286873000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
