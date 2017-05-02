@@ -12,6 +12,7 @@ class BotmanController extends Controller
 
     public function handle()
     {
+        dd('made it here');
         $botman = app('botman');
         $botman->verifyServices('harry_messenger_botman_webhook');
 
@@ -22,7 +23,10 @@ class BotmanController extends Controller
 
         $botman->listen();
     }
-
+    public function privacy()
+    {
+        return view('privacy');
+    }
     /**
      * Loaded through routes/botman.php
      * @param  BotMan $bot
