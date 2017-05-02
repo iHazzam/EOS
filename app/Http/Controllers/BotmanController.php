@@ -12,7 +12,6 @@ class BotmanController extends Controller
 
     public function handle()
     {
-        dd('made it here');
         $botman = app('botman');
         $botman->verifyServices('harry_messenger_botman_webhook');
 
