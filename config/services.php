@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'botman' => [
-        'facebook_token' => 'YOUR-FACEBOOK-TOKEN-HERE',
-        'facebook_app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE', // Optional - this is used to verify incoming API calls,
+        'facebook_token' => 'EAAbJRtvJhZB0BACrZBceJfCmMF3SPYkXiW10Er1VkqtbGAJI57rNZBbN2bOkWiuXFHip77mK7FEATdB09WFtru0dMQDXgPRbSyk4XPXAR0qfJsbQJc5qifyyMfVVVdhO6NVDMZAHQNid3rcNBvXkJ5pwgYIGsg9RwiHoiKnZCRQZDZD',
+        'facebook_app_secret' => 'harry_messenger_playdale_webhook', // Optional - this is used to verify incoming API calls,
     ],
 
 ];
