@@ -49,6 +49,12 @@ $this->post('login', 'Auth\LoginController@login');
 //Route::get('/webhook','BotmanController@webhook');
 Route::get('/webhook', 'BotmanController@handle');
 Route::post('/webhook','BotmanController@handle');
+
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
+
+
+
 // Registration Routes... - DISABLED
 //$this->get('register', 'Auth\RegisterController@showRegistrationForm');
 //$this->post('register', 'Auth\RegisterController@register');
@@ -59,5 +65,7 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
+
+//API routes
 Route::get('/api/products/get','apiController@getProducts')->middleware(['cors']);
 Route::get('/api/currencies/get','apiController@getCurrencies')->middleware(['cors']);

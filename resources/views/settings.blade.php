@@ -76,6 +76,12 @@
                     </form>
                 </div>
                 <div class="box-header with-border">
+                    <div class="box-title">PlayBot link account</div>
+                </div>
+                <div class="box-body">
+                    To link your Facebook account to use PlayBot, please use this <a href={{url('redirect')}}>link</a>
+                </div>
+                <div class="box-header with-border">
                     <div class="box-title">Playdale contact details</div>
                 </div>
                 <div class="box-body">

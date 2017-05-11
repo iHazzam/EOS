@@ -34,9 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-    'botman' => [
-        'facebook_token' => 'EAAbJRtvJhZB0BACrZBceJfCmMF3SPYkXiW10Er1VkqtbGAJI57rNZBbN2bOkWiuXFHip77mK7FEATdB09WFtru0dMQDXgPRbSyk4XPXAR0qfJsbQJc5qifyyMfVVVdhO6NVDMZAHQNid3rcNBvXkJ5pwgYIGsg9RwiHoiKnZCRQZDZD',
-        'facebook_app_secret' => 'harry_messenger_playdale_webhook', // Optional - this is used to verify incoming API calls,
-    ],
+    'facebook' =>[
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect'=>env('FACEBOOK_REDIRECT')
+    ]
 
 ];
