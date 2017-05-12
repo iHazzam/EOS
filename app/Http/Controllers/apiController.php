@@ -43,12 +43,12 @@ class apiController extends Controller
     public function auth()
     {
         Log::info('Auth called');
-        return true;
+        return 'true';
     }
     public function userDetails($id)
     {
         //TODO: Add fbmid column to user table in DB
-        return User::where('fmbid','=',$id)->first();
+        return User::where('fbmid','=',$id)->first();
     }
     public function getLastOrder($id)
     {
