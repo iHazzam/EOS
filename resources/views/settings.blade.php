@@ -79,7 +79,34 @@
                     <div class="box-title">PlayBot link account</div>
                 </div>
                 <div class="box-body">
-                    To link your Facebook account to use PlayBot, please use this <a href={{url('redirect')}}>link</a>
+                    <div class="section">
+                        <p>
+                            To link your account, please send a message to "Playbot" on facebook saying "whoami" without the quotes. This will tell you your app-specific uid to link your account.
+                        </p>
+                    </div>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/social/link/account') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('account') ? ' has-error' : '' }}" >
+                            <label for="account" class="col-md-4 control-label">Facebook Account ID</label>
+                            <div class="col-md-6">
+                                <input id="account" type="text" class="form-control" name="account" value="">
+
+                                @if ($errors->has('account'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('account') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Link!
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="box-header with-border">
                     <div class="box-title">Playdale contact details</div>

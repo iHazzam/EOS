@@ -63,7 +63,7 @@ Route::get('/callback', 'SocialAuthController@callback');
 $this->get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm');
 $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
-
+$this->post('social/link/account','SocialAuthController@link');
 
 
 //API routes
