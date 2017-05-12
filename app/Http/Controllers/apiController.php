@@ -40,19 +40,26 @@ class apiController extends Controller
         dd($request);
     }
 
-    public function auth()
+    public function auth($uid)
     {
         Log::info('Auth called');
-        return 'true';
+
+        $uid = User::where('fbm_id','=',$uid)->first();
+        if($uid != null)
+        {
+            return "true";
+        }
+        else return "false";
+
     }
-    public function userDetails($id)
+    public function userDetails($uid)
     {
         //TODO: Add fbmid column to user table in DB
-        return User::where('fbm_id','=',$id)->first();
+        return User::where('fbm_id','=',$uid)->first();
     }
-    public function getLastOrder($id)
+    public function getLastOrder($uid)
     {
-        $user = User::where('fbm_id','=',$id)->first();
+        $user = User::where('fbm_id','=',$uid)->first();
         return Order::where('user_id','=',$user->id)->latest()->first();
     }
     public function getLastOrderItems(Order $oid)
