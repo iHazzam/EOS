@@ -69,3 +69,9 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 //API routes
 Route::get('/api/products/get','apiController@getProducts')->middleware(['cors']);
 Route::get('/api/currencies/get','apiController@getCurrencies')->middleware(['cors']);
+//BOTMAN API ROUTES
+Route::post('/api/order/{uid}/new','apiController@newOrder')->middleware(['cors']);
+Route::get('/api/auth/{uid}','apiController@auth')->middleware(['cors']);
+Route::get('/api/auth/{uid}/details','apiController@userDetails')->middleware(['cors']);
+Route::get('/api/last/{uid}','apiController@lastOrder')->middleware(['cors']);
+Route::get('/api/last/items/{uid}','apiController@lastOrderItems')->middleware(['cors']);

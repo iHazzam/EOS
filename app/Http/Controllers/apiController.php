@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Order;
+use App\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Currency;
-
+use Monolog\Logger;
+use Illuminate\Support\Facades\Log;
 class apiController extends Controller
 {
     //
@@ -30,6 +34,31 @@ class apiController extends Controller
         return $larry;
     }
 
+    public function newOrder(Request $request)
+    {
+        Log::info('Request made');
+        dd($request);
+    }
+
+    public function auth()
+    {
+        Log::info('Auth called');
+        return true;
+    }
+    public function userDetails($id)
+    {
+        //TODO: Add fbmid column to user table in DB
+        return User::where('fmbid','=',$id)->first();
+    }
+    public function getLastOrder($id)
+    {
+        $user = User::where('fmbid','=',$id)->first();
+        return Order::where('user_id','=',$user->id)->latest()->first();
+    }
+    public function getLastOrderItems(Order $oid)
+    {
+        $products = OrderProduct::where('order_id','=',$oid->id)->get();
+        return $products;
+    }
 
  }
-//}
