@@ -6,10 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d74202a-683e-4c88-bf53-2588f3f12233" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/apiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/apiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/settings.blade.php" afterPath="$PROJECT_DIR$/resources/views/settings.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <ignored path="EOS.iws" />
     <ignored path=".idea/workspace.xml" />
