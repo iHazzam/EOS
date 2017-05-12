@@ -74,4 +74,4 @@ Route::post('/api/order/{uid}/new','apiController@newOrder')->middleware(['cors'
 Route::get('/api/auth/{uid}','apiController@auth')->middleware(['cors']);
 Route::get('/api/auth/{uid}/details','apiController@userDetails')->middleware(['cors']);
 Route::get('/api/last/{uid}','apiController@lastOrder')->middleware(['cors']);
-Route::get('/api/last/items/{oid}','apiController@lastOrderItems')->middleware(['cors']);
+Route::get('/api/last/{uid}/{oid}','apiController@lastOrderItems')->middleware(['cors']);
