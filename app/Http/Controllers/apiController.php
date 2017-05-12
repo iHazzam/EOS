@@ -52,7 +52,7 @@ class apiController extends Controller
     }
     public function getLastOrder($id)
     {
-        $user = User::where('fmbid','=',$id)->first();
+        $user = User::where('fbmid','=',$id)->first();
         return Order::where('user_id','=',$user->id)->latest()->first();
     }
     public function getLastOrderItems(Order $oid)
