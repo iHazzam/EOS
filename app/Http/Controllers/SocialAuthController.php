@@ -20,8 +20,10 @@ class SocialAuthController extends Controller
     }
     public function link(Request $request)
     {
-        $user = Auth::user();
-        $user->fbmid = $request->account;
+        $id = Auth::id();
+        $user = User::find($id);
+        $user->fbm_id = $request->account;
+        $user->save();
         $request->session()->flash('alert-success', "Thanks, your account has been linked - please note, this cannot be verifed so if you have any trouble, please try again");
         return redirect()->back();
     }

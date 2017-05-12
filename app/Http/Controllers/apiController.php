@@ -48,11 +48,11 @@ class apiController extends Controller
     public function userDetails($id)
     {
         //TODO: Add fbmid column to user table in DB
-        return User::where('fbmid','=',$id)->first();
+        return User::where('fbm_id','=',$id)->first();
     }
     public function getLastOrder($id)
     {
-        $user = User::where('fbmid','=',$id)->first();
+        $user = User::where('fbm_id','=',$id)->first();
         return Order::where('user_id','=',$user->id)->latest()->first();
     }
     public function getLastOrderItems(Order $oid)
