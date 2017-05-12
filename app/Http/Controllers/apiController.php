@@ -65,11 +65,12 @@ class apiController extends Controller
     public function lastOrderItems($oid, $uid)
     {
         $user = User::where('fbm_id','=',$uid)->first();
-        if($user != null){
-            $products = OrderProduct::where('order_id','=',$oid)->get();
-            return $products;
-        }
-        else return 'null';
+        return $user;
+//        if($user != null){
+//            $products = OrderProduct::where('order_id','=',$oid)->get();
+//            return $products;
+//        }
+//        else return 'null';
     }
 
  }
