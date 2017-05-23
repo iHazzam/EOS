@@ -11311,7 +11311,7 @@ const app = new Vue({
         }
     },
     created: function () {
-        axios.get('http://playdale.me/api/currencies/get').then(response => {
+        axios.get('https://playdale.me/api/currencies/get').then(response => {
             this.currencies = response.data;
         });
     }
