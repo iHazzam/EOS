@@ -57,6 +57,18 @@ class apiController extends Controller
         //TODO: Add fbmid column to user table in DB
         return User::where('fbm_id','=',$uid)->first();
     }
+    public function userAddr($uid)
+    {
+        //TODO: Add fbmid column to user table in DB
+        $user = User::where('fbm_id','=',$uid)->first();
+        $addr = [];
+        $addr['address_line1'] = $user->address_line1;
+        $addr['address_line2'] = $user->address_line2;
+        $addr['city'] = $user->city;
+        $addr['country'] = $user->country;
+        $addr['postcode'] = $user->postcode;
+        return $addr;
+    }
     public function lastOrder($uid)
     {
         $user = User::where('fbm_id','=',$uid)->first();

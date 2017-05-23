@@ -73,5 +73,6 @@ Route::get('/api/currencies/get','apiController@getCurrencies')->middleware(['co
 Route::post('/api/order/{uid}/new','apiController@newOrder')->middleware(['cors']);
 Route::get('/api/auth/{uid}','apiController@auth')->middleware(['cors']);
 Route::get('/api/auth/{uid}/details','apiController@userDetails')->middleware(['cors']);
+Route::get('/api/auth/{uid}/address','apiController@userAddr')->middleware(['cors']);
 Route::get('/api/last/order/{uid}','apiController@lastOrder')->middleware(['cors']);
 Route::get('/api/last/order/{uid}/{oid}','apiController@lastOrderItems')->middleware(['cors']);
