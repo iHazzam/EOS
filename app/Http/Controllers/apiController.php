@@ -64,7 +64,9 @@ class apiController extends Controller
     }
     public function lastOrderItems($uid,$oid)
     {
+        dd($uid);
         $user = User::where('fbm_id','=',$uid)->first();
+        dd($user);
         if($user->exists()){
             $products = OrderProduct::where('order_id','=',$oid)->get();
             return $products;
