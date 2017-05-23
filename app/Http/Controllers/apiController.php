@@ -66,7 +66,6 @@ class apiController extends Controller
     {
         dd($uid);
         $user = User::where('fbm_id','=',$uid)->first();
-        dd($user);
         if($user->exists()){
             $products = OrderProduct::where('order_id','=',$oid)->get();
             return $products;
