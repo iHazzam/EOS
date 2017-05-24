@@ -34,6 +34,7 @@
                                 <th>Delivery Method</th>
                                 <th>Order Total</th>
                                 <th>Shipping Total</th>
+                                <th>Products ordered</th>
                             </thead>
 
                             <!-- Table Body -->
@@ -64,6 +65,16 @@
                                     </td>
                                     <td class="table-text">
                                         <div>£{{ $order->shipping_total }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>
+                                            <ul class="cmonul">
+                                                <?php $prodcodes = $order->order_product->all();?>
+                                                @foreach($prodcodes as $prodcode)
+                                                    <li>{{$prodcode->product_code . " (" . $prodcode->quantity . ")"}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
