@@ -264,7 +264,7 @@
 
     <div class="form-group" >
         <div class="checkbox">
-            <label><input type="checkbox" value=""><small>Please Note: By ticking this box you are agreeing that the above details are correct</small></label>
+            <label><input type="checkbox" required value=""><small>Please Note: By ticking this box you are agreeing that the above details are correct</small></label>
         </div>
 
     </div>
