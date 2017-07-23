@@ -61,7 +61,13 @@ class OrderController extends Controller
           }
           if($request->has('shipping_total'))
           {
-              $order->shipping_total = $request->shipping_total;
+              if($request->shipping_total == "To Be Determined")
+              {
+                  $order->shipping_total = 0;
+              }
+              else{
+                  $order->shipping_total = $request->shipping_total;
+              }
           }
           else
           {

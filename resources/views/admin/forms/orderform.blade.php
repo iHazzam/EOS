@@ -105,7 +105,7 @@
                         </p>
                     </figure>
                     <p>
-                        <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br><del>RRP: @{{currencySymbol}}@{{ product.price }}</del> Your price: @{{currencySymbol}}@{{product.discountedprice}}
+                        <span>@{{product.quantity}} x </span><strong>@{{ product.code }}</strong> @{{product.name}} <br> Your price: @{{currencySymbol}}@{{product.discountedprice}}
 
                         <input type="hidden" name="products[]" :value="product.code">
                         <input type="hidden" name="quantities[]" :value="product.quantity">
@@ -121,8 +121,7 @@
                 </article>
             </div>
             <div class="panel-block">
-                <div class="columns is-fullwidth"><span class="column is-one-third">Total: <del>@{{currencySymbol}}@{{orderedproducts.getTotalPrice()}}</del></span>
-                    <span class="column is-offset-two-thirds">After Discount: <b> @{{currencySymbol}}@{{orderedproducts.getDiscountedPrice()}} </b></span></div>
+                    <span class="column">Your Price: <b> @{{currencySymbol}}@{{orderedproducts.getDiscountedPrice()}} </b></span>
                 <input type="hidden" name="order_total" :value="orderedproducts.getDiscountedPrice()">
             </div>
             <div class="panel-block">
@@ -134,7 +133,7 @@
     </div>
     <br>
     <div class="form-group" >
-        <label for="custom" class="control-label">Custom details</label>
+        <label for="custom" class="control-label">Additional Information</label>
 
         <input type="text" class="form-control" id="custom" name="custom" placeholder=""  value="{{ old('custom')}}">
 
@@ -177,7 +176,7 @@
                     Your Delivery Quote
                 </div>
                 <div class="panel-block">
-                    <div class="columns is-fullwidth"><span class="column is-one-third">Total: @{{currencySymbol}}@{{getDeliveryCost}}</span>
+                    <div class="columns is-fullwidth"><span class="column">Total: @{{currencySymbol}}@{{getDeliveryCost}}</span>
                         <input type="hidden" name="shipping_total" :value="getDeliveryCost">
                     </div>
                 </div>
@@ -197,7 +196,7 @@
             <div class="form-group" >
                 <label for="addr1" class="control-label">Delivery Address Line 1</label>
 
-                <input type="text" class="form-control" id="addr1" name="addr1" placeholder="" value="{{ old('addr1') ? old('addr1') : Auth::user()->address_line1  }}" required="" hidden>
+                <input type="text" class="form-control" id="addr1" name="addr1" placeholder="" value="{{ old('addr1') ? old('addr1') : Auth::user()->address_line1  }}" hidden>
 
 
             </div>
@@ -211,21 +210,21 @@
             <div class="form-group">
                 <label for="city" class="control-label">Delivery Address City</label>
 
-                <input type="text" class="form-control" id="city" name="city"  value="{{ old('city') ? old('city') : Auth::user()->city  }}" placeholder="" required="" hidden>
+                <input type="text" class="form-control" id="city" name="city"  value="{{ old('city') ? old('city') : Auth::user()->city  }}" placeholder=""  hidden>
 
 
             </div>
             <div class="form-group">
                 <label for="postcode" class="control-label">Delivery Address Postcode</label>
 
-                <input type="text" class="form-control" id="postcode" name="postcode" value="{{ old('postcode') ? old('postcode') : Auth::user()->postcode  }}" placeholder="" required="" hidden>
+                <input type="text" class="form-control" id="postcode" name="postcode" value="{{ old('postcode') ? old('postcode') : Auth::user()->postcode  }}" placeholder=""  hidden>
 
 
             </div>
             <div class="form-group">
                 <label for="country" class="control-label">Delivery Address Country</label>
 
-                <input type="text" class="form-control" id="country" name="country" value="{{ old('country') ? old('country') : Auth::user()->country  }}" placeholder="" required="" hidden>
+                <input type="text" class="form-control" id="country" name="country" value="{{ old('country') ? old('country') : Auth::user()->country  }}" placeholder=""  hidden>
 
 
             </div>
@@ -236,10 +235,37 @@
 
 
     <div class="form-group" >
-        <label for="inconterms" class="control-label">Incoterms</label>
+        <label for="incoterms" class="control-label">Incoterms</label>
+        <select name="incoterms" id="incoterms" class="form-control">
+            <option value="EXW">Ex Works </option>
 
-        <input type="text" class="form-control" id="incoterms" name="incoterms" placeholder=""  value="{{ old('incoterms')}}">
+            <option value="FCA">Free Carrier</option>
 
+            <option value="CPT">Carriage Paid To</option>
+
+            <option value="CIP">Carriage and Insurance Paid to</option>
+
+            <option value="DAT">Delivered At Terminal</option>
+
+            <option value="DAP">Delivered At Place</option>
+
+            <option value="DDP">Delivered Duty Paid</option>
+
+            <option value="FOB"> Free on Board</option>
+
+            <option value="CFR">Cost and Freight</option>
+
+            <option value="CIF">Cost, Insurance & Freight</option>
+
+            <option value="FAS">Free Alongside Ship</option>
+        </select>
     </div>
 
+
+    <div class="form-group" >
+        <div class="checkbox">
+            <label><input type="checkbox" value=""><small>Please Note: By ticking this box you are agreeing that the above details are correct</small></label>
+        </div>
+
+    </div>
 </div>

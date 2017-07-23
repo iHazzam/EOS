@@ -11207,7 +11207,7 @@ const app = new Vue({
         label: '',
         value: '',
         value1: '',
-        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="imageurl"></p></figure><p><strong>{{ code }}</strong> {{name}} <br> £{{ price }}</p></article>'
+        myTemplate: '<article class="media"><figure class="media-left"><p class="image is-64x64"><img :src="imageurl"></p></figure><p><strong>{{ code }}</strong> {{name}} </p></article>'
     },
     methods: {
         toggleDefaultContact: function () {
@@ -11255,13 +11255,6 @@ const app = new Vue({
             return price * this.currencies[this.currency];
         },
         updateDeliveryCost: function () {
-            var dm = [];
-            dm[0] = 0.205;
-            dm[1] = 0.175;
-            dm[2] = 0.15;
-            dm[3] = 0.125;
-            dm[4] = 240;
-
             var doccharge = [];
             doccharge['USD'] = 0;
             doccharge['EUR'] = 65;
@@ -11269,24 +11262,12 @@ const app = new Vue({
 
             var delcost = 0;
             if (this.deliveryChecked) {
-                var totalPrice = this.orderedproducts.getTotalPrice();
-                if (totalPrice > 9000) {
-                    delcost = totalPrice * dm[3];
-                } else if (totalPrice > 3600) {
-                    delcost = totalPrice * dm[2];
-                } else if (totalPrice > 1800) {
-                    delcost = totalPrice * dm[1];
-                } else {
-                    delcost = totalPrice * dm[0];
-                    if (delcost < dm[4]) {
-                        delcost = dm[4];
-                    }
-                }
+                delcost = "To Be Determined";
             } else {
-                delcost = doccharge[this.currency];
+                delcost = doccharge[this.currency].toFixed(2);
             }
 
-            this.deliveryCost = delcost.toFixed(2);
+            this.deliveryCost = delcost;
         }
 
     },
@@ -11311,7 +11292,7 @@ const app = new Vue({
         }
     },
     created: function () {
-        axios.get('http://playdale.me/api/currencies/get').then(response => {
+        axios.get(window.Laravel.baseURL + '/api/currencies/get').then(response => {
             this.currencies = response.data;
         });
     }
