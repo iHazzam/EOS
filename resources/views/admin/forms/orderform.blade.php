@@ -237,27 +237,27 @@
     <div class="form-group" >
         <label for="incoterms" class="control-label">Incoterms</label>
         <select name="incoterms" id="incoterms" class="form-control">
-            <option value="EXW">Ex Works </option>
+            <option value="EXW">EXW - Ex Works </option>
 
-            <option value="FCA">Free Carrier</option>
+            <option value="FCA">FCA - Free Carrier</option>
 
-            <option value="CPT">Carriage Paid To</option>
+            <option value="CPT">CPT - Carriage Paid To</option>
 
-            <option value="CIP">Carriage and Insurance Paid to</option>
+            <option value="CIP">CIP - Carriage and Insurance Paid to</option>
 
-            <option value="DAT">Delivered At Terminal</option>
+            <option value="DAT">DAT - Delivered At Terminal</option>
 
-            <option value="DAP">Delivered At Place</option>
+            <option value="DAP">DAP - Delivered At Place</option>
 
-            <option value="DDP">Delivered Duty Paid</option>
+            <option value="DDP">DDP - Delivered Duty Paid</option>
 
-            <option value="FOB"> Free on Board</option>
+            <option value="FOB">FOB - Free on Board</option>
 
-            <option value="CFR">Cost and Freight</option>
+            <option value="CFR">CFR - Cost and Freight</option>
 
-            <option value="CIF">Cost, Insurance & Freight</option>
+            <option value="CIF">CIF - Cost, Insurance & Freight</option>
 
-            <option value="FAS">Free Alongside Ship</option>
+            <option value="FAS">FAS - Free Alongside Ship</option>
         </select>
     </div>
 

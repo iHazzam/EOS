@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\User;
 use App\Order;
+use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     //
@@ -184,12 +185,12 @@ class AdminController extends Controller
                 'project_name'=>'required',
                 'country'=>'required',
                 'purchase_order_reference'=>'required',
-                'delivery' => 'required',
-                'order_total' => 'required'
+                'delivery' => 'required'
             ]);
 
             $error = false;
 
+            $order2 = $order;
             $order->address_line1 = $request->addr1;
             $order->city = $request->city;
             $order->contact_name = $request->name_on_order;
@@ -200,9 +201,11 @@ class AdminController extends Controller
             $order->project_name = $request->project_name;
             $order->purchase_order_reference = $request->purchase_order_reference;
             $order->delivery = $request->delivery;
-            $order->order_total = $request->order_total;
 
-
+            if($request->has('order_total'))
+            {
+                $order->order_total = $request->order_total;
+            }
             if($request->has('addr2'))
             {
                 $order->address_line2 = $request->addr2;
@@ -237,14 +240,17 @@ class AdminController extends Controller
             }
             $oid = $order->save();
             $order_products = OrderProduct::where('order_id','=',$order->id)->delete();
-            foreach($request->products as $key => $prod)
+            if($request->products)
             {
-                $order_product = new OrderProduct();
-                $order_product->order_id = $order->id;
-                $order_product->product_code = $prod;
-                $order_product->quantity = $request->quantities[$key];
-                $order_product->price = $request->prices[$key];
-                $order_product->save();
+                foreach($request->products as $key => $prod)
+                {
+                    $order_product = new OrderProduct();
+                    $order_product->order_id = $order->id;
+                    $order_product->product_code = $prod;
+                    $order_product->quantity = $request->quantities[$key];
+                    $order_product->price = $request->prices[$key];
+                    $order_product->save();
+                }
             }
             $request->session()->flash('alert-warning', "This order has now been updated - please rememeber this must also be manually updated in Sage.");
             Auth::user()->notify(new OrderEdited($order->id));

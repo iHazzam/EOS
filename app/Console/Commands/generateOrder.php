@@ -2,9 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\NewOrder;
 use App\Order;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+
 class generateOrder extends Command
 {
     /**
@@ -119,7 +122,7 @@ class generateOrder extends Command
         $exp[] = "N";
         $export2[] = $exp;
     }
-        Excel::create('Export_Order_' . $order->id, function($excel) use ($export2, $order){
+        $filepath = Excel::create('Export_Order_' . $order->id, function($excel) use ($export2, $order){
 
             $excel->setTitle('Export Order ' . $order->id . ' for Playdale');
             $excel->setCreator('PlaydaleEOS');
@@ -131,5 +134,6 @@ class generateOrder extends Command
             });
 
         })->store('csv',storage_path('excel/exports'));
+        Mail::to('salesorders@playdale.co.uk')->send(new NewOrder(storage_path('excel/exports/Export_Order_'. $order->id . '.csv')));
     }
 }

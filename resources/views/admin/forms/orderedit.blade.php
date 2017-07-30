@@ -156,9 +156,29 @@
     <legend>Other Details</legend>
 
 
-    <div class="form-group" >
-        <label for="inconterms" class="control-label">Incoterms</label>
+<div class="form-group" >
+    <label for="incoterms" class="control-label">Incoterms</label>
+    <select name="incoterms" id="incoterms" class="form-control">
+        <option value="EXW" @if($order->incoterms == "EXW") selected @endif>EXW - Ex Works </option>
 
-        <input type="text" class="form-control" id="incoterms" name="incoterms" placeholder=""  value="{{$order->incoterms}}">
+        <option value="FCA" @if($order->incoterms == "FCA") selected @endif>FCA - Free Carrier</option>
 
-    </div>
+        <option value="CPT" @if($order->incoterms == "CPT") selected @endif>CPT - Carriage Paid To</option>
+
+        <option value="CIP" @if($order->incoterms == "CIP") selected @endif>CIP - Carriage and Insurance Paid to</option>
+
+        <option value="DAT" @if($order->incoterms == "DAT") selected @endif>DAT - Delivered At Terminal</option>
+
+        <option value="DAP" @if($order->incoterms == "DAP") selected @endif>DAP - Delivered At Place</option>
+
+        <option value="DDP" @if($order->incoterms == "DDP") selected @endif>DDP - Delivered Duty Paid</option>
+
+        <option value="FOB" @if($order->incoterms == "FOB") selected @endif>FOB - Free on Board</option>
+
+        <option value="CFR" @if($order->incoterms == "CFR") selected @endif>CFR - Cost and Freight</option>
+
+        <option value="CIF" @if($order->incoterms == "CIF") selected @endif>CIF - Cost, Insurance & Freight</option>
+
+        <option value="FAS" @if($order->incoterms == "FAS") selected @endif>FAS - Free Alongside Ship</option>
+    </select>
+</div>
